@@ -1,4 +1,5 @@
 @import "../../theme/mixins.scss";
+@import "../../theme/variables.scss";
 
 ul {
   list-style: none;
@@ -27,7 +28,7 @@ ul {
   }
 
   .active {
-      color: #05263F;
+      color: $background-color;
       background-color: white;
   }
 }

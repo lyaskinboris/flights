@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build -prod --optimization",
+    "build:prod": "ng build --prod --build-optimizer",
+    "build:prod-opt": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -12,13 +14,17 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.0.0",
+    "@angular/cdk": "^10.0.0",
     "@angular/common": "~10.0.0",
     "@angular/compiler": "~10.0.0",
     "@angular/core": "~10.0.0",
     "@angular/forms": "~10.0.0",
+    "@angular/material": "^10.0.0",
+    "@angular/material-moment-adapter": "^10.0.0",
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
+    "moment": "^2.26.0",
     "rxjs": "~6.5.5",
     "sweetalert2": "^9.15.2",
     "tslib": "^2.0.0",

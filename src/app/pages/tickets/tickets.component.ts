@@ -19,8 +19,9 @@ export class TicketsComponent implements OnInit {
     this.tickets.push(new Ticket('Tomsk', '6 июля 11:00', 'Москва', '6 июля 15:00'));
   }
 
-  addTicket() {
-
+  addTicket(): void {
+    // fromCity: string, fromTime: string, toCity: string, arrivalTime: string
+    // this.tickets.push(new Ticket(fromCity, fromTime, toCity, arrivalTime));
   }
 }
 

@@ -1,0 +1,57 @@
+<div class="ticket-create">
+  <div class="form-image">
+    <img src="../../../../assets/img/aircraft.svg" alt="" />
+  </div>
+  <div class="form-content">
+    <form [formGroup]="tickets">
+      <span class="title">Авиабилет</span>
+      <div class="form-content">
+        <div class="row-direction">
+          <input
+            type="text"
+            formControlName="fromCity"
+            placeholder="Откуда"
+            class="input-control"
+          />
+          <app-ui-datepicker
+            formControlName="fromDate"
+            [placeholder]="'Дата вылета'"
+          ></app-ui-datepicker>
+          
+          <mat-form-field class="mat-input-wrapper">
+            <input
+              matInput
+              type="time"
+              placeholder="Время вылета"
+              formControlName="fromTime"
+            />
+          </mat-form-field>
+        </div>
+        <div class="row-direction">
+          <input
+            type="text"
+            formControlName="arrivalCity"
+            placeholder="Куда"
+            class="input-control"
+          />
+
+          <app-ui-datepicker
+            formControlName="arrivalDate"
+            placeholder="Дата прилета"
+          ></app-ui-datepicker>
+          <mat-form-field class="mat-input-wrapper">
+            <input
+              matInput
+              type="time"
+              placeholder="Время прилета"
+              formControlName="arrivalTime"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <button class="base-button" (click)="createTicket()">
+        Создать билет
+      </button>
+    </form>
+  </div>
+</div>
