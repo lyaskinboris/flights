@@ -4,19 +4,19 @@ import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { TicketsModule } from './pages/tickets/tickets.module';
-import { UITabsComponent } from './ui-kit/ui-tabs/ui-tabs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UIKitModule } from './ui-kit/ui-kit.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UITabsComponent,
   ],
   imports: [
     BrowserModule,
     TicketsModule,
     CommonModule,
     BrowserAnimationsModule,
+    UIKitModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
