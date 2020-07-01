@@ -1,0 +1,23 @@
+<mat-form-field class="example-full-width input-wrapper">
+  <mat-label>{{placeholder}}</mat-label>
+
+  <input
+    type="text"
+    [placeholder]="placeholder"
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="changeDropdown($event)"
+    [displayWith]="transform"
+  >
+    <mat-option
+      *ngFor="let option of filteredOptions$ | async"
+      [value]="option"
+    >
+      <span [innerHTML]="option.name"></span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
