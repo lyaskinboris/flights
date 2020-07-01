@@ -1,0 +1,10 @@
+<mat-form-field class="mat-input-wrapper">
+  <!-- <mat-label>{{placeholder}}</mat-label> -->
+  <input
+    matInput
+    [type]="type"
+    [placeholder]="placeholder"
+    [readonly]="readonly"
+    (change)="changeValue($event.target.value)"
+  />
+</mat-form-field>
