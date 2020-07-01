@@ -7,46 +7,42 @@
       <span class="title">Авиабилет</span>
       <div class="form-content">
         <div class="row-direction">
-          <input
-            type="text"
+          <app-ctrl-autocomplete-address
+            [items]="address"
             formControlName="fromCity"
             placeholder="Откуда"
-            class="input-control"
-          />
+          ></app-ctrl-autocomplete-address>
+
           <app-ui-datepicker
             formControlName="fromDate"
             [placeholder]="'Дата вылета'"
           ></app-ui-datepicker>
-          
-          <mat-form-field class="mat-input-wrapper">
-            <input
-              matInput
-              type="time"
-              placeholder="Время вылета"
-              formControlName="fromTime"
-            />
-          </mat-form-field>
+
+          <app-ctrl-input
+            formControlName="fromTime"
+            type="time"
+            placeholder="Время вылета"
+            [error]="tickets.get('fromTime').errors"
+          ></app-ctrl-input>
         </div>
+
         <div class="row-direction">
-          <input
-            type="text"
+          <app-ctrl-autocomplete-address
+            [items]="address"
             formControlName="arrivalCity"
             placeholder="Куда"
-            class="input-control"
-          />
+          ></app-ctrl-autocomplete-address>
 
           <app-ui-datepicker
             formControlName="arrivalDate"
             placeholder="Дата прилета"
           ></app-ui-datepicker>
-          <mat-form-field class="mat-input-wrapper">
-            <input
-              matInput
-              type="time"
-              placeholder="Время прилета"
-              formControlName="arrivalTime"
-            />
-          </mat-form-field>
+
+          <app-ctrl-input
+            formControlName="arrivalTime"
+            type="time"
+            placeholder="Время прилета"
+          ></app-ctrl-input>
         </div>
       </div>
       <button class="base-button" (click)="createTicket()">

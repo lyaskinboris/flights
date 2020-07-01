@@ -1,8 +1,11 @@
+import { Address } from './../../shared/models/address.model';
 export class Ticket {
   constructor(
-    public fromCity: string,
+    public fromCity: Address,
+    public fromDate: string,
     public fromTime: string,
-    public toCity: string,
+    public arrivalCity: Address,
+    public arrivalDate: string,
     public arrivalTime: string
   ) {
 
