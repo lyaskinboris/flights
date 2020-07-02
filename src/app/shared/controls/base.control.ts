@@ -20,4 +20,10 @@ export class BaseControl implements ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
   }
 
+  onFocus(): void {
+  }
+
+  onBlur(): void {
+  }
+
 }

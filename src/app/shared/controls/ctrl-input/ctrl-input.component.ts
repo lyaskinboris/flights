@@ -1,5 +1,5 @@
 import { Component, forwardRef, ViewEncapsulation, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 
 import { BaseControl } from '../base.control';
 
@@ -19,7 +19,6 @@ export class CtrlInputComponent extends BaseControl implements ControlValueAcces
   @Input() placeholder: string;
   @Input() type = 'text';
   @Input() readonly = false;
-  @Input() error;
 
   value;
   disabled = false;
