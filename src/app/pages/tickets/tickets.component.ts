@@ -1,6 +1,10 @@
+import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { Component, OnInit } from '@angular/core';
 import { Ticket } from './ticket.model';
 import { Address } from 'src/app/shared/models/address.model';
+import { MatDialog } from '@angular/material/dialog';
+import { TicketsService } from './tickets.service';
+
 
 @Component({
   selector: 'app-tickets',
@@ -8,19 +12,25 @@ import { Address } from 'src/app/shared/models/address.model';
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
-  tickets: Ticket[] = [];
+   tickets: Ticket[] = [];
 
-  constructor() {
-
+  constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
+    this.tickets = this.ticketsService.tickets;
+    this.ticketsService.setDefaultValue();
   }
 
   ngOnInit(): void {
-    this.tickets.push(new Ticket(new Address('Tomsk', 1, 1), '6 июля', '11:00', new Address('Tomsk', 1, 1), '6 июля', '15:00'));
-    this.tickets.push(new Ticket(new Address('Novosib', 1, 1), '6 июля', '11:00', new Address('Omsk', 1, 1), '6 июля', '15:00'));
-    this.tickets.push(new Ticket(new Address('Kiev', 1, 1), '6 июля', '11:00', new Address('Kemerovo', 1, 1), '6 июля', '15:00'));
+
   }
 
   addTicket(): void {
+    const dialogRef = this.dialog.open(TicketCreateComponent, {
+      closeOnNavigation: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
     // fromCity: string, fromTime: string, toCity: string, arrivalTime: string
     // this.tickets.push(new Ticket(fromCity, fromTime, toCity, arrivalTime));
   }
