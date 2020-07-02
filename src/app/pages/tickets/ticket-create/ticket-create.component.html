@@ -3,7 +3,7 @@
     <img src="../../../../assets/img/aircraft.svg" alt="" />
   </div>
   <div class="form-content">
-    <form [formGroup]="tickets">
+    <form [formGroup]="ticketsForm">
       <span class="title">Авиабилет</span>
       <div class="form-content">
         <div class="row-direction">
@@ -11,19 +11,30 @@
             [items]="address"
             formControlName="fromCity"
             placeholder="Откуда"
-          ></app-ctrl-autocomplete-address>
+          >
+            <app-c-errors
+              [control]="ticketsForm.get('fromCity')"
+            ></app-c-errors>
+          </app-ctrl-autocomplete-address>
 
           <app-ui-datepicker
             formControlName="fromDate"
             [placeholder]="'Дата вылета'"
-          ></app-ui-datepicker>
+          >
+            <app-c-errors
+              [control]="ticketsForm.get('fromDate')"
+            ></app-c-errors>
+          </app-ui-datepicker>
 
           <app-ctrl-input
             formControlName="fromTime"
             type="time"
             placeholder="Время вылета"
-            [error]="tickets.get('fromTime').errors"
-          ></app-ctrl-input>
+          >
+            <app-c-errors
+              [control]="ticketsForm.get('fromTime')"
+            ></app-c-errors>
+          </app-ctrl-input>
         </div>
 
         <div class="row-direction">
@@ -31,18 +42,30 @@
             [items]="address"
             formControlName="arrivalCity"
             placeholder="Куда"
-          ></app-ctrl-autocomplete-address>
+          >
+            <app-c-errors
+              [control]="ticketsForm.get('arrivalCity')"
+            ></app-c-errors>
+          </app-ctrl-autocomplete-address>
 
           <app-ui-datepicker
             formControlName="arrivalDate"
             placeholder="Дата прилета"
-          ></app-ui-datepicker>
+          >
+            <app-c-errors
+              [control]="ticketsForm.get('arrivalDate')"
+            ></app-c-errors>
+          </app-ui-datepicker>
 
           <app-ctrl-input
             formControlName="arrivalTime"
             type="time"
             placeholder="Время прилета"
-          ></app-ctrl-input>
+          >
+            <app-c-errors
+              [control]="ticketsForm.get('arrivalTime')"
+            ></app-c-errors>
+          </app-ctrl-input>
         </div>
       </div>
       <button class="base-button" (click)="createTicket()">
@@ -50,4 +73,8 @@
       </button>
     </form>
   </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
 </div>

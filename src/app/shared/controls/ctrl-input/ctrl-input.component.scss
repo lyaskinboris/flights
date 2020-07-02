@@ -1,3 +1,9 @@
+app-ctrl-input {
+  &.ng-touched.ng-dirty.ng-invalid mat-form-field {
+    border: 1px solid red;
+  }
+}
+
 mat-form-field {
   background: white;
   margin: 1rem 0;

@@ -5,16 +5,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { TicketsComponent } from './tickets.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
+import { CErrorsComponent } from '../../shared/component/c-errors/c-errors.component';
+import { TicketsService } from './tickets.service';
+
 
 @NgModule({
   declarations: [
     TicketsComponent,
     TicketComponent,
     TicketCreateComponent,
+    CErrorsComponent,
   ],
   exports: [
     TicketsComponent,
@@ -25,8 +30,13 @@ import { TicketCreateComponent } from './ticket-create/ticket-create.component';
     FormsModule,
     ReactiveFormsModule,
     ControlsModule,
+    MatDialogModule,
+  ],
+  entryComponents: [
+    TicketCreateComponent
   ],
   providers: [
+    TicketsService,
     {
       provide: MAT_DATE_FORMATS, useValue: {
         parse: {

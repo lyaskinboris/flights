@@ -1,7 +1,7 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
-import { Component, Input, forwardRef, OnInit } from '@angular/core';
+import { Component, Input, forwardRef, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { startWith, map, debounceTime, switchMap } from 'rxjs/operators';
+import { startWith, debounceTime, switchMap } from 'rxjs/operators';
 import { Address } from '../../models/address.model';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { BaseControl } from '../base.control';
@@ -14,7 +14,8 @@ import { BaseControl } from '../base.control';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CtrlAutocompleteAddressComponent),
     multi: true
-  }]
+  }],
+  encapsulation: ViewEncapsulation.None
 })
 export class CtrlAutocompleteAddressComponent extends BaseControl implements ControlValueAccessor, OnInit {
   @Input() items: Address[];

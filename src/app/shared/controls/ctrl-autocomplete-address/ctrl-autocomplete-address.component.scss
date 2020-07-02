@@ -1,3 +1,8 @@
+app-ctrl-autocomplete-address {
+  &.ng-touched.ng-dirty.ng-invalid mat-form-field {
+    border: 1px solid red;
+  }
+}
 .input-wrapper {
-    padding: 0.5rem 0 0 0.5rem;
+  padding: 0.5rem 0 0 0.5rem;
 }
