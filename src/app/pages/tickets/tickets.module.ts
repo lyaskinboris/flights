@@ -6,12 +6,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { TicketsComponent } from './tickets.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { CErrorsComponent } from '../../shared/component/c-errors/c-errors.component';
 import { TicketsService } from './tickets.service';
+import { TicketMapComponent } from './ticket-map/ticket-map.component';
+import { TicketRouteComponent } from './ticket-map/ticket-route/ticket-route.component';
+import { RESTService } from '../../providers/rest.service';
 
 
 @NgModule({
@@ -20,9 +25,12 @@ import { TicketsService } from './tickets.service';
     TicketComponent,
     TicketCreateComponent,
     CErrorsComponent,
+    TicketMapComponent,
+    TicketRouteComponent,
   ],
   exports: [
     TicketsComponent,
+    TicketMapComponent,
   ],
   imports: [
     CommonModule,
@@ -31,12 +39,14 @@ import { TicketsService } from './tickets.service';
     ReactiveFormsModule,
     ControlsModule,
     MatDialogModule,
+    HttpClientModule,
   ],
   entryComponents: [
     TicketCreateComponent
   ],
   providers: [
     TicketsService,
+    RESTService,
     {
       provide: MAT_DATE_FORMATS, useValue: {
         parse: {

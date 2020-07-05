@@ -4,3 +4,13 @@
   align-items: $align;
   flex-direction: $direction;
 }
+
+@mixin base-button {
+  color: white;
+  background-color: #1e3c53;
+  border-radius: 0.5rem;
+  min-width: 320px;
+  padding: 1.5rem;
+  border: none;
+  cursor: pointer;
+}

@@ -22,7 +22,7 @@ export class CtrlDatepickerComponent extends BaseControl implements ControlValue
   disabled = false;
 
   dateValueChanged(e): void {
-    this.value = _moment(e.value).format('DD.MM.YYYY');
+    this.value = _moment(e.value).format('DD-MM-YYYY');
     this.onChange(this.value);
     this.onTouched();
   }

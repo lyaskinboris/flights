@@ -17,7 +17,7 @@
       *ngFor="let option of filteredOptions$ | async"
       [value]="option"
     >
-      <span [innerHTML]="option.name"></span>
+      <span [innerHTML]="option.value"></span>
     </mat-option>
   </mat-autocomplete>
   <ng-content></ng-content>

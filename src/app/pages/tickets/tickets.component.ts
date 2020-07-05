@@ -4,6 +4,7 @@ import { Ticket } from './ticket.model';
 import { Address } from 'src/app/shared/models/address.model';
 import { MatDialog } from '@angular/material/dialog';
 import { TicketsService } from './tickets.service';
+import * as _moment from 'moment';
 
 
 @Component({
@@ -15,12 +16,12 @@ export class TicketsComponent implements OnInit {
    tickets: Ticket[] = [];
 
   constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
-    this.tickets = this.ticketsService.tickets;
+    // this.tickets = this.ticketsService.tickets;
     this.ticketsService.setDefaultValue();
   }
 
   ngOnInit(): void {
-
+    this.ticketsService.getAllTickets();
   }
 
   addTicket(): void {
@@ -31,20 +32,13 @@ export class TicketsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+    
     // fromCity: string, fromTime: string, toCity: string, arrivalTime: string
     // this.tickets.push(new Ticket(fromCity, fromTime, toCity, arrivalTime));
   }
 
-  getFromDateAndTime(ticket: Ticket): string {
-    return this.getDateAndTime(ticket.fromDate, ticket.fromTime);
-  }
-
-  getArrivalDateAndTime(ticket: Ticket): string {
-    return this.getDateAndTime(ticket.arrivalDate, ticket.arrivalTime);
-  }
-
-  private getDateAndTime(date: string, time: string): string {
-    return date + ' ' + time;
+  getTimeString(time: _moment.Moment): string {
+    return _moment(time).format('DD.MM.YYYY hh:mm:ss');
   }
 }
 

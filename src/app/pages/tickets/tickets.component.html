@@ -5,12 +5,12 @@
         <button (click)='addTicket()'>Добавить билет</button>
       </div>
     </div>
-    <div *ngFor="let ticket of tickets">
+    <div *ngFor="let ticket of ticketsService.getTickets()">
       <app-ticket
         [fromCity]="ticket.fromCity.name"
-        [fromTime]="getFromDateAndTime(ticket)"
+        [fromTime]="getTimeString(ticket.fromTime)"
         [toCity]="ticket.arrivalCity.name"
-        [arrivalTime]="getArrivalDateAndTime(ticket)"
+        [arrivalTime]="getTimeString(ticket.arrivalTime)"
       ></app-ticket>
     </div>
   </div>

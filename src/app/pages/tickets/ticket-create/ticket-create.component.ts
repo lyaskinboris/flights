@@ -1,6 +1,6 @@
 import { Ticket } from './../ticket.model';
-import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { Address } from '../../../shared/models/address.model';
 import { TicketsService } from '../tickets.service';
@@ -45,12 +45,22 @@ export class TicketCreateComponent implements OnInit {
         }
       );
     } else {
-      const ticket = new Ticket({ ...this.ticketsForm.value });
-      this.ticketsService.addTicket(ticket);
+
+      const ticket = {
+        fromCity: this.ticketsForm.get('fromCity').value,
+        fromTime: this.getTime(this.ticketsForm.get('fromDate').value, this.ticketsForm.get('fromTime').value),
+        arrivalCity: this.ticketsForm.get('arrivalCity').value,
+        arrivalTime: this.getTime(this.ticketsForm.get('fromDate').value, this.ticketsForm.get('fromTime').value),
+        id: Math.random().toString(16).slice(2)
+      };
+
+      this.ticketsService.addTicket(new Ticket({ ...ticket }));
     }
   }
 
-  // get
+  getTime(date: string, time: string): moment.Moment {
+    return moment(date + ' ' + time, 'DD.MM.YYYY hh:mm:ss');
+  }
 }
 
 

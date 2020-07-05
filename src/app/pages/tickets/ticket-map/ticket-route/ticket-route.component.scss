@@ -1,0 +1,54 @@
+@import "../../../../theme/mixins.scss";
+@import "../../../../theme/variables.scss";
+
+.cards-wrapper {
+  @include flex(row, flex-start, flex-start);
+  flex-wrap: wrap;
+  border-bottom: 1px dashed white;
+  border-top: 1px dashed white;
+  padding: 2rem;
+  margin-top: 0.3rem;
+
+  .card {
+    text-align: center;
+    flex: 1 1 15rem;
+    margin: 1rem 2rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1),
+      0px 20px 20px rgba(0, 0, 0, 0.1);
+    background: white;
+
+    position: relative;
+
+    h4 {
+      padding: 0.3rem;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    p {
+      padding: 0.3rem;
+      font-size: 1.3rem;
+    }
+
+    &::after {
+      content: "\2192";
+      position: absolute;
+      color: white;
+      font-size: 20px;
+      right: -30px;
+      top: 50%;
+    }
+
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .base-btn {
+    @include base-button();
+    background-color: #f57c00;
+    color: white;
+  }
+}

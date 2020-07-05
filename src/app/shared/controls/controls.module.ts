@@ -1,5 +1,4 @@
 import { CtrlInputComponent } from './ctrl-input/ctrl-input.component';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { NgModule } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -28,7 +27,6 @@ import { CommonModule } from '@angular/common';
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
-    NgSelectModule,
     MatAutocompleteModule,
     CommonModule,
     FormsModule,
