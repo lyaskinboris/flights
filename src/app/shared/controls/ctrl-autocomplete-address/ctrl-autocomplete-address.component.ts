@@ -20,7 +20,6 @@ import { BaseControl } from '../base.control';
   encapsulation: ViewEncapsulation.None
 })
 export class CtrlAutocompleteAddressComponent extends BaseControl implements ControlValueAccessor, OnInit {
-  @Input() items: Address[];
   @Input() placeholder: string;
 
   filteredOptions$: Observable<any[]>;
@@ -70,7 +69,7 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
       startWith(''),
       switchMap((query: string) => {
         // return of(this.items);
-        return this.restService.getData(typeof query === 'string' ? query : '')
+        return this.restService.getListOfCities(typeof query === 'string' ? query : '')
           .pipe(
             map((value) => value.suggestions)
           );

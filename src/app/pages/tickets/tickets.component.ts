@@ -13,10 +13,8 @@ import * as _moment from 'moment';
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
-   tickets: Ticket[] = [];
 
   constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
-    // this.tickets = this.ticketsService.tickets;
     this.ticketsService.setDefaultValue();
   }
 
@@ -32,9 +30,6 @@ export class TicketsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-    
-    // fromCity: string, fromTime: string, toCity: string, arrivalTime: string
-    // this.tickets.push(new Ticket(fromCity, fromTime, toCity, arrivalTime));
   }
 
   getTimeString(time: _moment.Moment): string {

@@ -1,11 +1,8 @@
 import { Address } from './../../shared/models/address.model';
+import { CityData } from '../../shared/models/city-data.model';
 export class Ticket {
-  public fromCity: Address;
-  public fromTime: moment.Moment;
-  public arrivalCity: Address;
-  public arrivalTime: moment.Moment;
-  public id: string;
-// тут будет объект с готовым дата + время (слитое)
+  public fromCity: CityData;
+  public arrivalCity: CityData;
 
   constructor(
     items: object

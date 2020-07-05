@@ -7,10 +7,10 @@
     </div>
     <div *ngFor="let ticket of ticketsService.getTickets()">
       <app-ticket
-        [fromCity]="ticket.fromCity.name"
-        [fromTime]="getTimeString(ticket.fromTime)"
-        [toCity]="ticket.arrivalCity.name"
-        [arrivalTime]="getTimeString(ticket.arrivalTime)"
+        [fromCity]="ticket.fromCity.address.name"
+        [fromTime]="getTimeString(ticket.fromCity.time)"
+        [toCity]="ticket.arrivalCity.address.name"
+        [arrivalTime]="getTimeString(ticket.fromCity.time)"
       ></app-ticket>
     </div>
   </div>

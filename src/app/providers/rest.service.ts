@@ -22,88 +22,108 @@ export class RESTService {
     return of([
       {
         fromCity: {
-          name: 'Tomsk',
-          longitude: 1,
-          latitude: 1
+          address: {
+            name: 'Tomsk',
+            longitude: 1,
+            latitude: 1
+          },
+          time: _moment('01-07-2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        fromTime: _moment('01-07-2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
         arrivalCity: {
-          name: 'Omsk',
-          longitude: 1,
-          latitude: 1
+          address: {
+            name: 'Omsk',
+            longitude: 1,
+            latitude: 1
+          },
+          time: _moment('01-07-2020 12:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        arrivalTime: _moment('01-07-2020 12:00:00', 'YYYY-MM-DD HH:mm:ss'),
-        id: Math.random().toString(16).slice(2),
       },
       {
         fromCity: {
-          name: 'Kemerovo',
-          longitude: 3,
-          latitude: 4
+          address: {
+            name: 'Kemerovo',
+            longitude: 3,
+            latitude: 4
+          },
+          time: _moment('02.07.2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        fromTime: _moment('02.07.2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
         arrivalCity: {
-          name: 'Erevan',
-          longitude: 1,
-          latitude: 1
+          address: {
+            name: 'Erevan',
+            longitude: 1,
+            latitude: 1
+          },
+          time: _moment('02.07.2020 14:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        arrivalTime: _moment('02.07.2020 14:00:00', 'YYYY-MM-DD HH:mm:ss'),
-        id: Math.random().toString(16).slice(2),
       },
       {
         fromCity: {
-          name: 'Omsk',
-          longitude: 2,
-          latitude: 2
+          address: {
+            name: 'Omsk',
+            longitude: 2,
+            latitude: 2
+          },
+          time: _moment('03.07.2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        fromTime: _moment('03.07.2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
         arrivalCity: {
-          name: 'Kemerovo',
-          longitude: 1,
-          latitude: 1
+          address: {
+            name: 'Kemerovo',
+            longitude: 1,
+            latitude: 1
+          },
+          time: _moment('03.07.2020 14:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        arrivalTime: _moment('03.07.2020 14:00:00', 'YYYY-MM-DD HH:mm:ss'),
-        id: Math.random().toString(16).slice(2),
       },
       {
         fromCity: {
-          name: 'Omsk',
-          longitude: 2,
-          latitude: 2
+          address: {
+            name: 'Omsk',
+            longitude: 2,
+            latitude: 2
+          },
+          time: _moment('04.07.2020 13:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        fromTime: _moment('04.07.2020 13:00:00', 'YYYY-MM-DD HH:mm:ss'),
         arrivalCity: {
-          name: 'Erevan',
-          longitude: 1,
-          latitude: 1
+          address: {
+            name: 'Erevan',
+            longitude: 1,
+            latitude: 1
+          },
+          time: _moment('04.07.2020 15:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        arrivalTime: _moment('04.07.2020 15:00:00', 'YYYY-MM-DD HH:mm:ss'),
-        id: Math.random().toString(16).slice(2),
       },
       {
         fromCity: {
-          name: 'Erevan',
-          longitude: 2,
-          latitude: 2
+          address: {
+            name: 'Erevan',
+            longitude: 2,
+            latitude: 2
+          },
+          time: _moment('04.07.2020 12:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        fromTime: _moment('04.07.2020 12:00:00', 'YYYY-MM-DD HH:mm:ss'),
         arrivalCity: {
-          name: 'London',
-          longitude: 1,
-          latitude: 1
+          address: {
+            name: 'London',
+            longitude: 1,
+            latitude: 1
+          },
+          time: _moment('05.07.2020 15:00:00', 'YYYY-MM-DD HH:mm:ss'),
+          id: Math.random().toString(16).slice(2),
         },
-        arrivalTime: _moment('04.07.2020 15:00:00', 'YYYY-MM-DD HH:mm:ss'),
-        id: Math.random().toString(16).slice(2),
       }
     ]);
   }
 
-  // getListOfCities() {
-  //   const header = 
-  //   return this.http.post();
-  // }
-
-  getData(value: string): Observable<any> {
+  getListOfCities(value: string): Observable<any> {
     if (!value) {
       return of({});
     }
