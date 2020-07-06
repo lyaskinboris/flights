@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MapService } from './map.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-route-map',
@@ -8,7 +9,7 @@ import { MapService } from './map.service';
   providers: [MapService]
 })
 export class RouteMapComponent implements OnInit {
-  // @ViewChild('yamaps', { static: false }) yandexMap;
+  @ViewChild('yamaps', { static: false }) yandexMap;
   map;
 
   constructor(private readonly mapService: MapService) {
@@ -16,17 +17,17 @@ export class RouteMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.mapService.yMapsLoaded.subscribe((value) => {
-    //   console.log('check', value);
-    //   if (value) {
-    //     this.map = new this.mapService.map.Map(this.yandexMap.nativeElement, {
-    //       center: [55.76, 37.64],
-    //       zoom: 3,
-    //       controls: ['geolocationControl', 'zoomControl', 'fullscreenControl']
-    //     });
-    //     // this.loadMap();
-    //   }
-    // });
+    this.mapService.yMapsLoaded.pipe(first()).subscribe((value) => {
+      console.log('check', value);
+      if (value) {
+        this.map = new this.mapService.map.Map(this.yandexMap.nativeElement, {
+          center: [55.76, 37.64],
+          zoom: 3,
+          controls: ['geolocationControl', 'zoomControl', 'fullscreenControl']
+        });
+        this.loadMap();
+      }
+    });
   }
 
   private loadMap() {
