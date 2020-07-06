@@ -1,0 +1,9 @@
+<div class="cards-wrapper">
+  <div *ngFor="let ticket of ticketRoute" class="card">
+    <h4>{{ getCityFromTicket(ticket) }}</h4>
+    <p>Время вылета: {{ getTimeFromTicket(ticket) }}</p>
+  </div>
+</div>
+<button class="base-btn" (click)="openMap()">Посмотреть на карте</button>
+<!-- ticket.arrivalTime.valueOf() -->
+<app-route-map *ngIf='open'></app-route-map>

@@ -1,12 +1,13 @@
 <div class="ticket-create">
-  <div class="form-image">
+  <!-- <div class="form-image">
     <img src="../../../../assets/img/aircraft.svg" alt="" />
-  </div>
-  <div class="form-content">
+  </div> -->
+  <div>
     <form [formGroup]="ticketsForm">
       <span class="title">Авиабилет</span>
       <div class="form-content">
-        <div class="row-direction">
+        <div class="column">
+          <h4>Откуда</h4>
           <app-ctrl-autocomplete-address
             formControlName="fromCity"
             placeholder="Откуда"
@@ -36,7 +37,9 @@
           </app-ctrl-input>
         </div>
 
-        <div class="row-direction">
+        <div class="column">
+          <h4>Куда</h4>
+
           <app-ctrl-autocomplete-address
             formControlName="arrivalCity"
             placeholder="Куда"
@@ -76,3 +79,4 @@
     <button mat-button mat-dialog-close>Cancel</button>
   </mat-dialog-actions>
 </div>
+<div *ngIf='true'>chleniii</div>

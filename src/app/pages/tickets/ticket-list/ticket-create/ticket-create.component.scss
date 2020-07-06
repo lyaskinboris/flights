@@ -1,0 +1,66 @@
+@import "../../../../theme/mixins.scss";
+@import "../../../../theme/variables.scss";
+
+.ticket-create {
+  .title {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .input-control {
+    display: block;
+    margin: 1rem 0rem;
+    margin-right: 1rem;
+    //   background: $background-color;
+    color: black;
+    border: 0.1rem solid $primary;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+
+    min-height: 55px;
+    height: 55px;
+
+    font-size: 1.6rem;
+
+    &::placeholder {
+      color: rgba(30, 60, 83, 0.7);
+    }
+  }
+
+  .base-btn {
+    @include base-button();
+  }
+
+  .form-content,
+  .form-image {
+    flex: 1 1 40rem;
+  }
+
+  .form-image img {
+    width: 60%;
+  }
+
+  .form-content {
+    margin-bottom: 2rem;
+
+    @include flex(row, flex-start, flex-start);
+    flex-wrap: wrap;
+  }
+
+  .column {
+    margin-right: 1.5rem;
+    border: 1px solid $primary;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  h4 {
+    font-weight: bold;
+  }
+}

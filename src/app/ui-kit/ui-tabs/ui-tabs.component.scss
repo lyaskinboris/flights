@@ -10,8 +10,10 @@ ul {
 
   li {
     font-size: 1.5rem;
-    padding: 1rem;
+    padding: 2rem;
     color: white;
+    outline: none;
+    cursor: pointer;
   }
 
   .left-btn, .right-btn {

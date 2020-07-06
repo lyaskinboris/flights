@@ -1,7 +1,6 @@
-import { ControlsModule } from './../../shared/controls/controls.module';
+import { ControlsModule } from './../../../shared/controls/controls.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
@@ -9,43 +8,41 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 
 
-import { TicketsComponent } from './tickets.component';
+import { TicketListComponent } from './ticket-list.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
-import { CErrorsComponent } from '../../shared/component/c-errors/c-errors.component';
-import { TicketsService } from './tickets.service';
-import { TicketMapComponent } from './ticket-map/ticket-map.component';
-import { TicketRouteComponent } from './ticket-map/ticket-route/ticket-route.component';
-import { RESTService } from '../../providers/rest.service';
+import { CErrorsComponent } from '../../../shared/component/c-errors/c-errors.component';
+import { RESTService } from '../../../providers/rest.service';
+import { Routes, RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
+const routes: Routes = [
+  {
+    path: '',
+    component: TicketListComponent,
+  }
+];
 
 @NgModule({
   declarations: [
-    TicketsComponent,
     TicketComponent,
     TicketCreateComponent,
     CErrorsComponent,
-    TicketMapComponent,
-    TicketRouteComponent,
-  ],
-  exports: [
-    TicketsComponent,
-    TicketMapComponent,
+    TicketListComponent,
   ],
   imports: [
     CommonModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     ControlsModule,
     MatDialogModule,
     HttpClientModule,
+    RouterModule.forChild(routes)
   ],
   entryComponents: [
-    TicketCreateComponent
+    TicketCreateComponent,
   ],
   providers: [
-    TicketsService,
     RESTService,
     {
       provide: MAT_DATE_FORMATS, useValue: {
@@ -64,12 +61,6 @@ import { RESTService } from '../../providers/rest.service';
       provide: MAT_DATE_LOCALE,
       useValue: 'ru-RU',
     },
-    // {
-    //   provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-    //   useValue: {
-    //     useUtc: false
-    //   }
-    // },
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -77,7 +68,7 @@ import { RESTService } from '../../providers/rest.service';
     }
   ]
 })
-export class TicketsModule {
-
+export class TicketListModule {
+  public static routes = routes;
 }
 

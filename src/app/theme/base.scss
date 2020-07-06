@@ -18,5 +18,51 @@ body {
 .row {
   @include flex(row, flex-start, flex-start);
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.column {
+  @include flex(column, flex-start, flex-start);
+}
+
+.container {
+  background-color: $background-color;
+  margin: 5%;
+  border-radius: 30px;
+  padding: 3rem;
+
+  .content {
+    // height: 100vh;
+    width: 100%;
+    h1 {
+      color: white;
+    }
+  }
+}
+
+mat-form-field {
+  background: white;
+  margin: 1rem 0;
+  margin-right: 1rem;
+  color: black;
+  border: 0.1rem solid $primary;
+  border-radius: 0.5rem;
+  font-size: 16px !important;
+  height: 55px;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+    height: 55px;
+  }
+  .mat-form-field-underline {
+    display: none;
+  }
+  &.mat-input-wrapper {
+    padding: 0.6rem;
+    height: 55px;
+  }
+
+  .mat-input-element {
+    font-size: 1.6rem;
+  }
 }

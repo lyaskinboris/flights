@@ -1,4 +1,4 @@
-import { TicketCreateComponent } from './ticket-create/ticket-create.component';
+// import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { Component, OnInit } from '@angular/core';
 import { Ticket } from './ticket.model';
 import { Address } from 'src/app/shared/models/address.model';
@@ -9,32 +9,38 @@ import * as _moment from 'moment';
 
 @Component({
   selector: 'app-tickets',
-  templateUrl: './tickets.component.html',
-  styleUrls: ['./tickets.component.scss']
+  template: `
+    <div class="container">
+      <div class="content">
+        <app-ui-tabs></app-ui-tabs>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  `,
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent {
 
-  constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
-    this.ticketsService.setDefaultValue();
-  }
+  // constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
+  //   this.ticketsService.setDefaultValue();
+  // }
 
-  ngOnInit(): void {
-    this.ticketsService.getAllTickets();
-  }
+  // ngOnInit(): void {
+  //   this.ticketsService.getAllTickets();
+  // }
 
-  addTicket(): void {
-    const dialogRef = this.dialog.open(TicketCreateComponent, {
-      closeOnNavigation: true
-    });
+  // addTicket(): void {
+  //   // const dialogRef = this.dialog.open(TicketCreateComponent, {
+  //   //   closeOnNavigation: true
+  //   // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  //   // dialogRef.afterClosed().subscribe(result => {
+  //   //   console.log(`Dialog result: ${result}`);
+  //   // });
+  // }
 
-  getTimeString(time: _moment.Moment): string {
-    return _moment(time).format('DD.MM.YYYY hh:mm:ss');
-  }
+  // getTimeString(time: _moment.Moment): string {
+  //   return _moment(time).format('DD.MM.YYYY hh:mm:ss');
+  // }
 }
 
 

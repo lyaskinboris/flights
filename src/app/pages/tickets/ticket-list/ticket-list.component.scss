@@ -1,6 +1,6 @@
-@import '../../theme/mixins.scss';
+@import '../../../theme/mixins.scss';
 
-.tickets-wrapper {
+.ticket-list-wrapper {
   @include flex(column, center, center);
   width: 100%;
   max-width: 1070px;

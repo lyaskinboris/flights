@@ -1,9 +1,9 @@
-import { Ticket } from './../ticket.model';
+import { Ticket } from '../../ticket.model';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 
-import { TicketsService } from '../tickets.service';
+import { TicketsService } from '../../tickets.service';
 
 @Component({
   selector: 'app-ticket-create',

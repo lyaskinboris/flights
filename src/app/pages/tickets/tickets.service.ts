@@ -8,10 +8,10 @@ import { CityData } from '../../shared/models/city-data.model';
 @Injectable()
 export class TicketsService {
   ticketEnum = ticketEnum;
-  ticketRouters: string[][] = [];
-  ticketsNeighbors: Map<string, Ticket[]> = new Map();
-  allCities: Map<string, CityData> = new Map();
 
+  private ticketsNeighbors: Map<string, Ticket[]> = new Map();
+  private allCities: Map<string, CityData> = new Map();
+  private ticketRouters: string[][] = [];
   private tickets: Ticket[] = [];
 
 
@@ -21,6 +21,15 @@ export class TicketsService {
 
   getTickets(): Ticket[] {
     return this.tickets;
+  }
+
+  getTicketRouters(): string[][] {
+    console.log('this.ticketRouters;', this.ticketRouters);
+    return this.ticketRouters;
+  }
+
+  getAllCities(): Map<string, CityData> {
+    return this.allCities;
   }
 
   setDefaultValue(): void {
@@ -46,7 +55,7 @@ export class TicketsService {
                 ticket.fromCity.address.name,
                 ticket
               );
-
+              console.log('gerte');
               this.setCities(ticket);
             }
           ));

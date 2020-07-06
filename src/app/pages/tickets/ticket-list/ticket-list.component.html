@@ -1,8 +1,8 @@
-<section class="tickets">
-  <div class="tickets-wrapper">
+<section class="ticket-list">
+  <div class="ticket-list-wrapper">
     <div class="row">
       <div class="add-ticket">
-        <button (click)='addTicket()'>Добавить билет</button>
+        <button (click)="addTicket()">Добавить билет</button>
       </div>
     </div>
     <div *ngFor="let ticket of ticketsService.getTickets()">

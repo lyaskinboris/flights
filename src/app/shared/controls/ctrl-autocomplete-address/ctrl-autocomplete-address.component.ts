@@ -68,11 +68,13 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
       debounceTime(300),
       startWith(''),
       switchMap((query: string) => {
-        // return of(this.items);
-        return this.restService.getListOfCities(typeof query === 'string' ? query : '')
-          .pipe(
-            map((value) => value.suggestions)
-          );
+        if (query) {
+          return this.restService.getListOfCities(typeof query === 'string' ? query : '')
+            .pipe(
+              map((value) => value.suggestions)
+            );
+        }
+        return of([]);
       })
     );
   }

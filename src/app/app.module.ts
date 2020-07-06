@@ -1,3 +1,6 @@
+import { TicketsService } from './pages/tickets/tickets.service';
+import { TicketsComponent } from './pages/tickets/tickets.component';
+import { UITabsComponent } from './ui-kit/ui-tabs/ui-tabs.component';
 import { RESTService } from './providers/rest.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -6,26 +9,28 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import { TicketsModule } from './pages/tickets/tickets.module';
+// import { TicketsModule } from './pages/tickets/tickets.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UIKitModule } from './ui-kit/ui-kit.module';
-import { AppRoutingModule } from './app-routing..module';
+import { AppRoutes } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TicketsComponent,
   ],
   imports: [
     BrowserModule,
-    TicketsModule,
+    // TicketsModule,
     CommonModule,
     BrowserAnimationsModule,
     UIKitModule,
-    AppRoutingModule,
+    AppRoutes,
     HttpClientModule,
   ],
   providers: [
-    RESTService
+    RESTService,
+    TicketsService
   ],
   bootstrap: [AppComponent]
 })

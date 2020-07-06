@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { UITabsComponent } from './ui-tabs/ui-tabs.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -9,6 +10,7 @@ import { UITabsComponent } from './ui-tabs/ui-tabs.component';
     UITabsComponent,
   ],
   imports: [
+    RouterModule
   ]
 })
 export class UIKitModule {
