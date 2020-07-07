@@ -4,6 +4,7 @@ import { Ticket } from './../../ticket.model';
 import * as moment from 'moment';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Utility } from '../../../../app.utility';
 
 @Component({
   selector: 'app-ticket-route',
@@ -35,11 +36,11 @@ export class TicketRouteComponent {
     this.open = true;
   }
 
-  getCityFromTicket(ticketRoute: string) {
+  getCityFromTicket(ticketRoute: string): string {
     return this.ticketsService.getAllCities().get(ticketRoute).address.name;
   }
 
-  getTimeFromTicket(ticketRoute: string) {
-    return moment(this.ticketsService.getAllCities().get(ticketRoute).time).format('DD.MM.YYYY hh:mm:ss');
+  getTimeFromTicket(ticketRoute: string): string {
+    return Utility.getDateTimeStringFromMoment(this.ticketsService.getAllCities().get(ticketRoute).time);
   }
 }

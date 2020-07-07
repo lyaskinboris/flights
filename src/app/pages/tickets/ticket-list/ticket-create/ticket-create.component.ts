@@ -38,7 +38,7 @@ export class TicketCreateComponent implements OnInit {
         }
       );
     } else {
-      const ticket = {
+      const ticket: Ticket = {
         fromCity: {
           address: {
             ...this.ticketsForm.get('fromCity').value
@@ -50,17 +50,19 @@ export class TicketCreateComponent implements OnInit {
           address: {
             ...this.ticketsForm.get('arrivalCity').value
           },
-          time: this.getTime(this.ticketsForm.get('fromDate').value, this.ticketsForm.get('fromTime').value),
+          time: this.getTime(this.ticketsForm.get('arrivalDate').value, this.ticketsForm.get('arrivalTime').value),
           id: Math.random().toString(16).slice(2)
         }
       };
 
-      this.ticketsService.addTicket(new Ticket({ ...ticket }));
+      this.ticketsService.addTicket(ticket);
     }
   }
 
   getTime(date: string, time: string): moment.Moment {
-    return moment(date + ' ' + time, 'DD.MM.YYYY hh:mm:ss');
+    const dateTime = date + ' ' + time;
+
+    return moment(dateTime, 'DD.MM.YYYY hh:mm:ss');
   }
 }
 

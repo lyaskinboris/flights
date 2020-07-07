@@ -1,3 +1,4 @@
+import { UIKitModule } from './../../../ui-kit/ui-kit.module';
 import { TicketRouteListComponent } from './ticket-route-list.component';
 import { RouteMapComponent } from './route-map/route-map.component';
 import { ControlsModule } from './../../../shared/controls/controls.module';
@@ -30,6 +31,7 @@ const routes: Routes = [
     ControlsModule,
     MatDialogModule,
     HttpClientModule,
+    UIKitModule,
     RouterModule.forChild(routes),
   ],
   entryComponents: [

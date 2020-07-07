@@ -44,4 +44,14 @@ export class Utility {
   static isBoolean(value): boolean {
     return typeof value === 'boolean';
   }
+
+  static getDateTimeStringFromMoment(value): string {
+    if (this.isMoment(value)) {
+      return moment(value).format('DD.MM.YYYY hh:mm');
+    }
+    if (this.isString(value)) {
+      return value;
+    }
+    return '';
+  }
 }

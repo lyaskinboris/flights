@@ -1,3 +1,4 @@
+import { Utility } from './../../../app.utility';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,13 +12,11 @@ import * as _moment from 'moment';
   styleUrls: ['./ticket-list.component.scss']
 })
 export class TicketListComponent implements OnInit {
-  a: number[] = [];
   constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
     this.ticketsService.setDefaultValue();
   }
 
   ngOnInit(): void {
-    this.a.push(3);
     this.ticketsService.getAllTickets();
   }
 
@@ -32,7 +31,7 @@ export class TicketListComponent implements OnInit {
   }
 
   getTimeString(time: _moment.Moment): string {
-    return _moment(time).format('DD.MM.YYYY hh:mm:ss');
+    return Utility.getDateTimeStringFromMoment(time);
   }
 }
 
