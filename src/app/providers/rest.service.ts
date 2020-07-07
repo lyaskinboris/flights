@@ -27,7 +27,7 @@ export class RESTService {
             longitude: 84.948197,
             latitude: 56.48468
           },
-          time: _moment('01-07-2020 11:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('01.07.2020 11:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
@@ -36,7 +36,7 @@ export class RESTService {
             longitude: 73.3674517,
             latitude: 54.9848566
           },
-          time: _moment('01-07-2020 12:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('01.07.2020 12:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
       },
@@ -47,7 +47,7 @@ export class RESTService {
             longitude: 86.0467781,
             latitude: 55.3910651
           },
-          time: _moment('02.07.2020 11:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('02.07.2020 11:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
@@ -56,7 +56,7 @@ export class RESTService {
             longitude: 44.51361,
             latitude: 40.18111
           },
-          time: _moment('02.07.2020 14:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('02.07.2020 14:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
       },
@@ -67,7 +67,7 @@ export class RESTService {
             longitude: 73.3674517,
             latitude: 54.9848566
           },
-          time: _moment('03.07.2020 11:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('03.07.2020 11:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
@@ -76,7 +76,7 @@ export class RESTService {
             longitude: 86.0467781,
             latitude: 55.3910651
           },
-          time: _moment('03.07.2020 14:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('03.07.2020 14:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
       },
@@ -87,7 +87,7 @@ export class RESTService {
             longitude: 73.3674517,
             latitude: 54.9848566
           },
-          time: _moment('04.07.2020 13:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('04.07.2020 13:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
@@ -96,7 +96,7 @@ export class RESTService {
             longitude: 44.51361,
             latitude: 40.18111
           },
-          time: _moment('04.07.2020 15:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('04.07.2020 15:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
       },
@@ -107,7 +107,7 @@ export class RESTService {
             longitude: 44.51361,
             latitude: 40.18111
           },
-          time: _moment('04.07.2020 12:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('04.07.2020 12:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
@@ -116,7 +116,7 @@ export class RESTService {
             longitude: -0.12574,
             latitude: 51.50853
           },
-          time: _moment('05.07.2020 15:00', 'YYYY-MM-DD HH:mm'),
+          time: _moment('05.07.2020 15:00', 'DD.MM.YYYY HH:mm'),
           id: Math.random().toString(16).slice(2),
         },
       }
