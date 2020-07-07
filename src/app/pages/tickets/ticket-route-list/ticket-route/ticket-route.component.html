@@ -5,5 +5,5 @@
   </div>
 </div>
 <button class="base-btn" (click)="openMap()">Посмотреть на карте</button>
-<!-- ticket.arrivalTime.valueOf() -->
-<app-route-map *ngIf='open'></app-route-map>
+
+<app-route-map *ngIf='open' [route]='ticketRoute'></app-route-map>

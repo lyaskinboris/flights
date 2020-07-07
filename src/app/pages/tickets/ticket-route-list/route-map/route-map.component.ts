@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { TicketsService } from './../../tickets.service';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { MapService } from './map.service';
 import { first } from 'rxjs/operators';
+import { Address } from '../../../../shared/models/address.model';
 
 @Component({
   selector: 'app-route-map',
@@ -9,52 +11,58 @@ import { first } from 'rxjs/operators';
   providers: [MapService]
 })
 export class RouteMapComponent implements OnInit {
+  @Input() route: string[] = [];
+
   @ViewChild('yamaps', { static: false }) yandexMap;
   map;
 
-  constructor(private readonly mapService: MapService) {
+  constructor(
+    private readonly mapService: MapService,
+    private readonly ticketsService: TicketsService,
+  ) {
 
   }
 
   ngOnInit(): void {
     this.mapService.yMapsLoaded.pipe(first()).subscribe((value) => {
-      console.log('check', value);
       if (value) {
         this.map = new this.mapService.map.Map(this.yandexMap.nativeElement, {
           center: [55.76, 37.64],
           zoom: 3,
           controls: ['geolocationControl', 'zoomControl', 'fullscreenControl']
         });
-        this.loadMap();
+        this.loadPlacemark();
       }
     });
   }
 
-  private loadMap() {
-    // Создаем ломаную.
+  private loadPlacemark(): void {
+    const location: number[][] = [];
+    const placemark: {}[] = [];
+    this.route.forEach((cityId: string) => {
+      const cityAddress: Address = this.ticketsService.getAllCities().get(cityId).address;
+      const currentLocation = [cityAddress.latitude, cityAddress.longitude];
+
+      location.push(currentLocation);
+      placemark.push(new this.mapService.map.Placemark(currentLocation, {
+        iconContent: cityAddress.name,
+        hintContent: 'Город ' + cityAddress.name
+      }, {
+        preset: 'islands#nightIcon'
+      }));
+    });
+
     const myPolyline = new this.mapService.map.Polyline([
-      // Указываем координаты вершин.
-      [70, 20],
-      [70, 40],
-      [90, 15],
-      [70, -10]
+      ...location
     ], {}, {
-      // Задаем опции геообъекта.
-      // Цвет с прозрачностью.
       strokeColor: '#FF008888',
       hasBalloon: true
     });
 
-    const myPlacemark1 = new this.mapService.map.Placemark([70, 20], {}, {
-      preset: 'twirl#redIcon'
-    });
-    const myPlacemark2 = new this.mapService.map.Placemark([70, 40], {}, {
-      preset: 'twirl#redIcon'
-    });
-    const myPlacemark3 = new this.mapService.map.Placemark([90, 15], {}, {
-      preset: 'twirl#redIcon'
-    });
+    this.map.geoObjects.add(myPolyline);
 
-    this.map.geoObjects.add(myPolyline).add(myPlacemark1).add(myPlacemark2).add(myPlacemark3);
+    placemark.forEach((label) => {
+      this.map.geoObjects.add(label);
+    });
   }
 }

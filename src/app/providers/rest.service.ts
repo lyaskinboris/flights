@@ -23,18 +23,18 @@ export class RESTService {
       {
         fromCity: {
           address: {
-            name: 'Tomsk',
-            longitude: 1,
-            latitude: 1
+            name: 'Томск',
+            longitude: 84.948197,
+            latitude: 56.48468
           },
           time: _moment('01-07-2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
           address: {
-            name: 'Omsk',
-            longitude: 1,
-            latitude: 1
+            name: 'Омск',
+            longitude: 73.3674517,
+            latitude: 54.9848566
           },
           time: _moment('01-07-2020 12:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
@@ -43,18 +43,18 @@ export class RESTService {
       {
         fromCity: {
           address: {
-            name: 'Kemerovo',
-            longitude: 3,
-            latitude: 4
+            name: 'Кемерово',
+            longitude: 86.0467781,
+            latitude: 55.3910651
           },
           time: _moment('02.07.2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
           address: {
-            name: 'Erevan',
-            longitude: 1,
-            latitude: 1
+            name: 'Ереван',
+            longitude: 44.51361,
+            latitude: 40.18111
           },
           time: _moment('02.07.2020 14:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
@@ -63,18 +63,18 @@ export class RESTService {
       {
         fromCity: {
           address: {
-            name: 'Omsk',
-            longitude: 2,
-            latitude: 2
+            name: 'Омск',
+            longitude: 73.3674517,
+            latitude: 54.9848566
           },
           time: _moment('03.07.2020 11:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
           address: {
-            name: 'Kemerovo',
-            longitude: 1,
-            latitude: 1
+            name: 'Кемерово',
+            longitude: 86.0467781,
+            latitude: 55.3910651
           },
           time: _moment('03.07.2020 14:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
@@ -83,18 +83,18 @@ export class RESTService {
       {
         fromCity: {
           address: {
-            name: 'Omsk',
-            longitude: 2,
-            latitude: 2
+            name: 'Омск',
+            longitude: 73.3674517,
+            latitude: 54.9848566
           },
           time: _moment('04.07.2020 13:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
           address: {
-            name: 'Erevan',
-            longitude: 1,
-            latitude: 1
+            name: 'Ереван',
+            longitude: 44.51361,
+            latitude: 40.18111
           },
           time: _moment('04.07.2020 15:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
@@ -103,18 +103,18 @@ export class RESTService {
       {
         fromCity: {
           address: {
-            name: 'Erevan',
-            longitude: 2,
-            latitude: 2
+            name: 'Ереван',
+            longitude: 44.51361,
+            latitude: 40.18111
           },
           time: _moment('04.07.2020 12:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
         },
         arrivalCity: {
           address: {
-            name: 'London',
-            longitude: 1,
-            latitude: 1
+            name: 'Лондон',
+            longitude: -0.12574,
+            latitude: 51.50853
           },
           time: _moment('05.07.2020 15:00:00', 'YYYY-MM-DD HH:mm:ss'),
           id: Math.random().toString(16).slice(2),
