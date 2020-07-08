@@ -2,9 +2,20 @@
   <mat-label>{{ placeholder }}</mat-label>
   <input
     matInput
-    [matDatepicker]="dp"
     placeholder="ДД.ММ.ГГГГ"
     mask='00.00.0000'
+    [showMaskTyped]='true'
+    [dropSpecialCharacters]='false'
+    [(ngModel)]='date'
+    (ngModelChange)="dateValueChanged($event)"
+    (focus)='onFocus()'
+    #fromInput
+  />
+  <input
+    matInput
+    [matDatepicker]="dp"
+    placeholder="ДД.ММ.ГГГГ"
+    hidden
     (dateChange)="dateValueChanged($event)"
   />
   <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
