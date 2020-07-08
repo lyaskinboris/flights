@@ -1,151 +1,118 @@
 import { Injectable } from '@angular/core';
 
-import { RESTService } from './../../providers/rest.service';
 import { Ticket } from './ticket.model';
-import { ticketEnum } from '../../shared/enums/ticket.enum';
 import { CityData } from '../../shared/models/city-data.model';
 
 @Injectable()
 export class TicketsService {
-  ticketEnum = ticketEnum;
 
-  private ticketsNeighbors: Map<string, Ticket[]> = new Map();
-  private allCities: Map<string, CityData> = new Map();
-  private ticketRouters: string[][] = [];
-  private tickets: Ticket[] = [];
+  private cityNeighbors: Map<string, Ticket[]> = new Map();
+  // tslint:disable-next-line: variable-name
+  private _mapOfCities: Map<string, CityData> = new Map();
+  // tslint:disable-next-line: variable-name
+  private _cityRoutes: string[][] = [];
+  // tslint:disable-next-line: variable-name
+  private _tickets: Ticket[] = [];
 
-
-  constructor(private readonly restService: RESTService) {
-
+  get tickets(): Ticket[] {
+    return this._tickets;
   }
 
-  getTickets(): Ticket[] {
-    return this.tickets;
+  get cityRoutes(): string[][] {
+    return this._cityRoutes;
   }
 
-  getTicketRouters(): string[][] {
-    console.log('this.ticketRouters;', this.ticketRouters);
-    return this.ticketRouters;
+  get mapOfCities(): Map<string, CityData> {
+    return this._mapOfCities;
   }
 
-  getAllCities(): Map<string, CityData> {
-    return this.allCities;
+
+  constructor() {
   }
 
-  setDefaultValue(): void {
+  addTickets(tickets: Ticket[]): void {
+    tickets.forEach((
+      (ticket: Ticket) => {
+        this.addTicket(ticket);
+      }
+    ));
+
+    this.generateAllPaths();
   }
 
-  addTicket(ticket: Ticket): void {
+  addTicket(ticket: Ticket, generateNewPaths?: boolean): void {
     this.tickets.push(ticket);
     this.setGraph(
       ticket.fromCity.address.name,
       ticket
     );
+
+    this.processCitiesOfTicket(ticket);
+
+    if (generateNewPaths) {
+      this.generateAllPaths();
+    }
+  }
+
+  private processCitiesOfTicket(ticket: Ticket): void {
     this.setCities(ticket);
   }
 
-  getAllTickets(): void {
-    if (!this.tickets || !this.tickets.length) {
-      this.restService.getTickets().subscribe(
-        (tickets: Ticket[]) => {
-          this.tickets = tickets;
-          this.tickets.forEach((
-            (ticket: Ticket) => {
-              this.setGraph(
-                ticket.fromCity.address.name,
-                ticket
-              );
-              console.log('gerte');
-              this.setCities(ticket);
-            }
-          ));
-          this.generateAllPaths();
-          this.removeDuplicatePaths();
-          console.log('check', this.ticketsNeighbors, this.ticketRouters);
-        }
-      );
+  private setGraph(from: string, ticketData: Ticket): void {
+    if (!this.cityNeighbors.has(from)) {
+      this.cityNeighbors.set(from, []);
     }
+    const cities = this.cityNeighbors.get(from);
+    cities.push(ticketData);
+
+    this.cityNeighbors.set(from, cities);
   }
 
-  getTicketRoutes(): { cityName: string, fromId: string }[][] {
-    return null;
-  }
+  private generateAllPaths(): void {
+    this._cityRoutes = [];
 
-  setGraph(from: string, ticketData: Ticket): void {
-    if (!this.ticketsNeighbors.has(from)) {  // Add the edge u -> v.
-      this.ticketsNeighbors.set(from, []);
-    }
-    const item = this.ticketsNeighbors.get(from);
-    item.push(ticketData);
+    Array.from(this.cityNeighbors, ([key, value]) => {
+      const toCity = this.cityNeighbors.get(value[0].fromCity.address.name) ?
+        this.cityNeighbors.get(value[0].fromCity.address.name)[0].fromCity : null;
 
-    this.ticketsNeighbors.set(from, item);
-  }
-
-  generateAllPaths(): void {
-    Array.from(this.ticketsNeighbors, ([key, value]) => {
-      const toCity = this.ticketsNeighbors.get(value[0].fromCity.address.name) ?
-        this.ticketsNeighbors.get(value[0].fromCity.address.name)[0].fromCity : null;
-
-      this.generateFullPaths(
+      this.generatePath(
         [value[0].fromCity.id],
-        toCity
+        toCity,
+        toCity.time
       );
     });
   }
 
-  generateFullPaths(
+  private generatePath(
     pathCitiesId: string[],
-    toCity: CityData
+    toCity: CityData,
+    fromCityTime: moment.Moment
   ): void {
 
     if (!toCity) {
-      this.ticketRouters.push(pathCitiesId);
+      this._cityRoutes.push(pathCitiesId);
       return;
     }
 
-    if (this.ticketsNeighbors.has(toCity.address.name)) {
-      const setCitiesFromToCity = this.ticketsNeighbors.get(toCity.address.name);
+    if (this.cityNeighbors.has(toCity.address.name)) {
+      const setCitiesFromToCity = this.cityNeighbors.get(toCity.address.name);
 
       for (const nextCity of setCitiesFromToCity) {
-        if (nextCity.arrivalCity.time > nextCity.fromCity.time) {
-          this.generateFullPaths(
+        if (nextCity.arrivalCity.time.valueOf() > fromCityTime.valueOf()) {
+          this.generatePath(
             pathCitiesId.concat(nextCity.arrivalCity.id),
-            nextCity.arrivalCity
+            nextCity.arrivalCity,
+            nextCity.arrivalCity.time
           );
-        } else {
-          this.ticketRouters.push(pathCitiesId);
         }
       }
     } else {
-      this.ticketRouters.push(pathCitiesId);
+      this._cityRoutes.push(pathCitiesId);
     }
   }
 
-  removeDuplicatePaths(): void {
-    const resultIndex = [];
-    this.ticketRouters = this.ticketRouters.sort((a, b) => b.length - a.length);
-
-    this.ticketRouters = this.ticketRouters.map(arrItem => JSON.stringify(arrItem).replace(/[\[\]']+/g, ''))
-      .filter((stringValue, id, newArr) => newArr.findIndex(p => p.includes(stringValue)) === id)
-      .map(arr => JSON.parse('[' + arr + ']'));
-
-    // .forEach((stringValue, id, newArr) => {
-    //   if (newArr.findIndex(p => p.includes(stringValue)) === id) {
-    //     resultIndex.push(this.ticketRouters[id]);
-    //   }
-    // });
-
-    // this.ticketRouters = resultIndex;
-  }
-
-  resetArrays(): void {
-    // this.tickets = [];
-    // this.ticketRouters = [];
-    // this.ticketsNeighbors = {};
-  }
-
-  setCities(ticket: Ticket) {
-    this.allCities.set(ticket.fromCity.id, ticket.fromCity);
-    this.allCities.set(ticket.arrivalCity.id, ticket.arrivalCity);
+  private setCities(ticket: Ticket): void {
+    this._mapOfCities.set(ticket.fromCity.id, ticket.fromCity);
+    this._mapOfCities.set(ticket.arrivalCity.id, ticket.arrivalCity);
   }
 }

@@ -6,7 +6,7 @@ import ymaps from 'ymaps';
 
 @Injectable()
 export class MapService {
-  yMapsLoaded: Subject<boolean> = new Subject();
+  yMapsLoaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
   map: any;
 
   constructor() {

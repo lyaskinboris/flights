@@ -13,11 +13,10 @@ import * as _moment from 'moment';
 })
 export class TicketListComponent implements OnInit {
   constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
-    this.ticketsService.setDefaultValue();
   }
 
   ngOnInit(): void {
-    this.ticketsService.getAllTickets();
+    console.log(this.ticketsService.tickets);
   }
 
   addTicket(): void {
@@ -33,6 +32,7 @@ export class TicketListComponent implements OnInit {
   getTimeString(time: _moment.Moment): string {
     return Utility.getDateTimeStringFromMoment(time);
   }
+
 }
 
 

@@ -1,11 +1,12 @@
 // import { TicketCreateComponent } from './ticket-create/ticket-create.component';
-import { Component, OnInit } from '@angular/core';
-import { Ticket } from './ticket.model';
-import { Address } from 'src/app/shared/models/address.model';
-import { MatDialog } from '@angular/material/dialog';
-import { TicketsService } from './tickets.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import * as _moment from 'moment';
 
+import { Ticket } from './ticket.model';
+import { RESTService } from '../../providers/rest.service';
+import { TicketsService } from './tickets.service';
 
 @Component({
   selector: 'app-tickets',
@@ -18,29 +19,37 @@ import * as _moment from 'moment';
     </div>
   `,
 })
-export class TicketsComponent {
+export class TicketsComponent implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<void> = new Subject();
 
-  // constructor(public dialog: MatDialog, public ticketsService: TicketsService) {
-  //   this.ticketsService.setDefaultValue();
-  // }
+  constructor(
+    private readonly restService: RESTService,
+    private readonly ticketsService: TicketsService
+  ) {
+  }
 
-  // ngOnInit(): void {
-  //   this.ticketsService.getAllTickets();
-  // }
+  ngOnInit(): void {
+    console.log('whats', this.ticketsService.tickets);
+    if (!this.ticketsService.tickets || !this.ticketsService.tickets.length) {
+      console.log('pfitk');
+      this.getAllTickets();
+    }
+  }
 
-  // addTicket(): void {
-  //   // const dialogRef = this.dialog.open(TicketCreateComponent, {
-  //   //   closeOnNavigation: true
-  //   // });
+  getAllTickets(): void {
+    this.restService.getTickets().pipe(takeUntil(this.unsubscribe$)).subscribe(
+      (tickets: Ticket[]) => {
+        console.log('data', tickets, this.ticketsService.tickets);
+        this.ticketsService.addTickets(tickets);
+      }
+    );
+  }
 
-  //   // dialogRef.afterClosed().subscribe(result => {
-  //   //   console.log(`Dialog result: ${result}`);
-  //   // });
-  // }
-
-  // getTimeString(time: _moment.Moment): string {
-  //   return _moment(time).format('DD.MM.YYYY hh:mm:ss');
-  // }
+  ngOnDestroy(): void {
+    if (this.unsubscribe$) {
+      this.unsubscribe$.next();
+      this.unsubscribe$.complete();
+    }
+  }
 }
-
 

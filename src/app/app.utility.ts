@@ -1,4 +1,6 @@
+import { dateTimeFormat } from './shared/constants';
 import * as moment from 'moment';
+import { Address } from './shared/models/address.model';
 
 export class Utility {
   static isMoment(value): boolean {
@@ -37,6 +39,11 @@ export class Utility {
     return typeof value === 'string';
   }
 
+  static isAddress(value: any): boolean {
+    // return true;
+    return value instanceof Address;
+  }
+
   static isNumber(value): boolean {
     return typeof value === 'number';
   }
@@ -47,7 +54,7 @@ export class Utility {
 
   static getDateTimeStringFromMoment(value): string {
     if (this.isMoment(value)) {
-      return moment(value).format('DD.MM.YYYY hh:mm');
+      return moment(value).format(dateTimeFormat);
     }
     if (this.isString(value)) {
       return value;

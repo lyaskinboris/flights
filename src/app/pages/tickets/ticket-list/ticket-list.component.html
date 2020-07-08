@@ -5,7 +5,7 @@
         <button (click)="addTicket()">Добавить билет</button>
       </div>
     </div>
-    <div *ngFor="let ticket of ticketsService.getTickets()">
+    <div *ngFor="let ticket of ticketsService.tickets">
       <app-ticket
         [fromCity]="ticket.fromCity.address.name"
         [fromTime]="getTimeString(ticket.fromCity.time)"

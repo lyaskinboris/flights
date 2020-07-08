@@ -37,9 +37,11 @@ export class CtrlDatepickerComponent extends BaseControl implements ControlValue
   }
 
   dateValueChanged(value: any ): void {
+    console.log('value', this.value);
+    console.log('value', value.value);
     if (value && Utility.isMoment(value.value)) {
       this.value = _moment(value.value, dateFormat);
-      this.date = _moment(this.value.value).format(dateFormat);
+      this.date = _moment(value.value).format(dateFormat);
     } else {
       if (dateRegex.test(value)) {
         this.value = _moment(value, dateFormat);

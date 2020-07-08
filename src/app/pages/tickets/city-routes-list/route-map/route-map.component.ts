@@ -1,8 +1,9 @@
 import { TicketsService } from './../../tickets.service';
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Inject, ElementRef } from '@angular/core';
 import { MapService } from './map.service';
 import { first } from 'rxjs/operators';
 import { Address } from '../../../../shared/models/address.model';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-route-map',
@@ -11,20 +12,22 @@ import { Address } from '../../../../shared/models/address.model';
   providers: [MapService]
 })
 export class RouteMapComponent implements OnInit {
-  @Input() route: string[] = [];
+  route: string[] = [];
 
-  @ViewChild('yamaps', { static: false }) yandexMap;
+  @ViewChild('yamaps', { static: true }) yandexMap: ElementRef;
   map;
 
   constructor(
     private readonly mapService: MapService,
     private readonly ticketsService: TicketsService,
+    @Inject(MAT_DIALOG_DATA) public data: string[]
   ) {
-
   }
 
   ngOnInit(): void {
-    this.mapService.yMapsLoaded.pipe(first()).subscribe((value) => {
+    console.log('data', this.data);
+    this.route = this.data;
+    this.mapService.yMapsLoaded.subscribe((value) => {
       if (value) {
         this.map = new this.mapService.map.Map(this.yandexMap.nativeElement, {
           center: [55.76, 37.64],
@@ -40,7 +43,7 @@ export class RouteMapComponent implements OnInit {
     const location: number[][] = [];
     const placemark: {}[] = [];
     this.route.forEach((cityId: string) => {
-      const cityAddress: Address = this.ticketsService.getAllCities().get(cityId).address;
+      const cityAddress: Address = this.ticketsService.mapOfCities.get(cityId).address;
       const currentLocation = [cityAddress.latitude, cityAddress.longitude];
 
       location.push(currentLocation);

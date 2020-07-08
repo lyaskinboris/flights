@@ -1,0 +1,4 @@
+<h1>Варианты маршрутов</h1>
+<div *ngFor="let ticketRoute of ticketsService.cityRoutes">
+  <app-city-routes [ticketRoute]="ticketRoute"></app-city-routes>
+</div>

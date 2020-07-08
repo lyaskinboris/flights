@@ -8,9 +8,7 @@ import { environment } from '../../environments/environment';
 import * as _moment from 'moment';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RESTService {
   constructor(
     private readonly http: HttpClient

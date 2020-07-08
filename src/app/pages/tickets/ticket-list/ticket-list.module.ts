@@ -12,7 +12,7 @@ import { TicketListComponent } from './ticket-list.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { CErrorsComponent } from '../../../shared/component/c-errors/c-errors.component';
-import { RESTService } from '../../../providers/rest.service';
+// import { RESTService } from '../../../providers/rest.service';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -43,7 +43,7 @@ const routes: Routes = [
     TicketCreateComponent,
   ],
   providers: [
-    RESTService,
+    // RESTService,
     {
       provide: MAT_DATE_FORMATS, useValue: {
         parse: {

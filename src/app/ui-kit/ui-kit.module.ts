@@ -15,8 +15,8 @@ import { UITabsComponent } from './ui-tabs/ui-tabs.component';
   ],
   imports: [
     RouterModule
-  ]
+  ],
+  providers: []
 })
 export class UIKitModule {
-
 }

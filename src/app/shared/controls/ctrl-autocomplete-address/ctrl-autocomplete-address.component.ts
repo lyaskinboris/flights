@@ -40,11 +40,11 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
   changeDropdown(value: MatAutocompleteSelectedEvent): void {
     this.value = value.option.value.data.city;
 
-    const address: Address = {
+    const address: Address = new Address({
       name: value.option.value.data.city,
       longitude: value.option.value.data.geo_lon,
       latitude: value.option.value.data.geo_lat
-    };
+    });
     console.log(address);
     this.onChange(address);
     this.onTouched();
@@ -57,10 +57,6 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
       return data.value;
     }
     return '';
-  }
-
-  getCityName(val) {
-    console.log(val);
   }
 
   private getData(): Observable<any[]> {
