@@ -1,48 +1,64 @@
 @import "../../../../theme/mixins.scss";
 @import "../../../../theme/variables.scss";
 
-.cards-wrapper {
-  @include flex(row, flex-start, flex-start);
-  flex-wrap: wrap;
-  border-bottom: 1px dashed white;
-  border-top: 1px dashed white;
-  padding: 2rem;
-  margin-top: 0.3rem;
+.routes-wrapper {
+  background: #1e3c53;
+  padding: 3rem;
 
-  .card {
-    text-align: center;
-    flex: 1 1 15rem;
-    margin: 1rem 2rem;
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1),
-      0px 20px 20px rgba(0, 0, 0, 0.1);
-    background: white;
+  .route-item-container {
+    @include flex(row, flex-start, flex-start);
+  }
 
-    position: relative;
-
-    h4 {
-      padding: 0.3rem;
-      font-size: 1.8rem;
-      margin: 0;
-    }
-
-    p {
-      padding: 0.3rem;
-      font-size: 1.3rem;
-    }
-
-    &::after {
-      content: "\2192";
-      position: absolute;
-      color: white;
-      font-size: 20px;
-      right: -30px;
-      top: 50%;
-    }
+  .route-item {
+    flex: 1 1 85rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 
     &:last-child {
-      &::after {
+      .line {
         display: none;
       }
+    }
+  }
+
+  .route-img {
+    position: relative;
+    .cicle {
+      font-size: 1.6rem;
+      font-weight: 600;
+
+      position: relative;
+      z-index: 1;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: white;
+      color: black;
+
+      @include flex(row, center, center);
+    }
+
+    .line {
+      @include flex(row, flex-start, flex-start);
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      right: -40px;
+      height: 1px;
+      background-color: black;
+    }
+  }
+
+  .route-content {
+    .header {
+      font-size: 1.8rem;
+      color: white;
+      margin-top: 2rem;
+    }
+    .time {
+      margin-top: 1.6rem;
+      font-size: 1.4rem;
+      color: #a0b0b9;
     }
   }
 
@@ -50,5 +66,51 @@
     @include base-button();
     background-color: #f57c00;
     color: white;
+    margin-top: 5rem;
+    min-width: 220px;
+  }
+}
+
+/* Media Query */
+@media screen and (max-width: 948px) {
+  .routes-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .route-item-container {
+      display: block;
+    }
+
+    .route-item {
+      display: flex;
+      flex: none;
+      margin: 2rem 0;
+    }
+
+    .route-img {
+      .line {
+        height: auto;
+        right: 0;
+        width: 2px;
+        bottom: -2rem;
+        top: 2px;
+        left: 50%;
+      }
+    }
+
+    .route-content {
+      margin-left: 2rem;
+      .header {
+        margin-top: 0;
+      }
+      .time {
+        margin-top: 1rem;
+      }
+    }
+
+    .base-btn {
+      min-width: 100%;
+    }
   }
 }

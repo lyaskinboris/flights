@@ -5,22 +5,15 @@
   width: 100%;
   max-width: 1070px;
   min-height: 178px;
-  margin: 0 auto;
-  padding: 10rem 2rem 0;
+  margin: 4rem auto;
 }
 
 .add-ticket {
   margin-bottom: 2rem;
 
-  button {
-    font-size: 1.6rem;
-    padding: 0.7rem 0.5rem 0.9rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
+  .base-btn {
+    @include base-button();
     background-color: #f57c00;
-    color: white;
-    border: none;
-    width: 100%;
-    max-width: 20rem;
+    min-width: 220px;
   }
 }

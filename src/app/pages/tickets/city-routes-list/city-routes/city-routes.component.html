@@ -1,9 +1,22 @@
-<div class="cards-wrapper">
-  <div *ngFor="let ticket of ticketRoute" class="card">
-    <h4>{{ getCityFromTicket(ticket) }}</h4>
-    <p>Время вылета: {{ getTimeFromTicket(ticket) }}</p>
+<div class="routes-wrapper">
+  <div class="route-item-container">
+    <div class="route-item" *ngFor="let ticket of ticketRoute; let index = index">
+      <div class="route-img">
+        <div class="cicle">
+          {{index + 1}}
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="route-content">
+        <div class="header">
+          {{ getCityFromTicket(ticket) }}
+        </div>
+        <div class="time">
+          Время вылета: <br />
+          {{ getTimeFromTicket(ticket) }}
+        </div>
+      </div>
+    </div>
   </div>
+  <button class="base-btn" (click)="openMap()">Посмотреть на карте</button>
 </div>
-<button class="base-btn" (click)="openMap()">Посмотреть на карте</button>
-
-<!-- <app-route-map *ngIf='open' [route]='ticketRoute'></app-route-map> -->

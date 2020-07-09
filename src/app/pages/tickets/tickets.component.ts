@@ -9,14 +9,8 @@ import { TicketsService } from './tickets.service';
 
 @Component({
   selector: 'app-tickets',
-  template: `
-    <div class="container">
-      <div class="content">
-        <app-ui-tabs></app-ui-tabs>
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  `,
+  templateUrl: './tickets.component.html',
+  styleUrls: ['./tickets.components.scss']
 })
 export class TicketsComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();

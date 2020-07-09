@@ -25,21 +25,6 @@ body {
   @include flex(column, flex-start, flex-start);
 }
 
-.container {
-  background-color: $background-color;
-  margin: 5%;
-  border-radius: 30px;
-  padding: 3rem;
-
-  .content {
-    // height: 100vh;
-    width: 100%;
-    h1 {
-      color: white;
-    }
-  }
-}
-
 mat-form-field {
   background: white;
   margin: 1rem 0;

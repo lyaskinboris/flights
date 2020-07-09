@@ -1,0 +1,16 @@
+@import '../../theme/variables.scss';
+
+.container {
+  background-color: $background-color;
+  margin: 5rem;
+  border-radius: 3rem;
+  padding: 3rem;
+
+  .content {
+    width: 100%;
+
+    .main {
+        padding-top: 3rem;
+    }
+  }
+}

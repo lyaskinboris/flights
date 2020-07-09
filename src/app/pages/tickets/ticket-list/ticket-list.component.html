@@ -2,7 +2,7 @@
   <div class="ticket-list-wrapper">
     <div class="row">
       <div class="add-ticket">
-        <button (click)="addTicket()">Добавить билет</button>
+        <button (click)="addTicket()" class='base-btn'>Добавить билет</button>
       </div>
     </div>
     <div *ngFor="let ticket of ticketsService.tickets">
