@@ -1,10 +1,7 @@
 import { RouteMapComponent } from '../route-map/route-map.component';
 import { TicketsService } from '../../tickets.service';
-import { Ticket } from '../../ticket.model';
-import * as moment from 'moment';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Utility } from '../../../../app.utility';
 
 @Component({
   selector: 'app-city-routes',
@@ -23,8 +20,6 @@ export class CityRoutesComponent {
   }
 
   openMap(): void {
-    // console.log(JSON.stringify(this.tickets));
-
     const dialogRef = this.dialog.open(RouteMapComponent, {
       closeOnNavigation: true,
       data: this.ticketRoute,
@@ -43,6 +38,6 @@ export class CityRoutesComponent {
   }
 
   getTimeFromTicket(ticketRoute: string): string {
-    return Utility.getDateTimeStringFromMoment(this.ticketsService.mapOfCities.get(ticketRoute).time);
+    return this.ticketsService.mapOfCities.get(ticketRoute).time;
   }
 }

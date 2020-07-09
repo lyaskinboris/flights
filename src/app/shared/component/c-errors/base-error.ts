@@ -6,8 +6,9 @@ export class BaseError {
   @Input() control: AbstractControl;
 
   @Input() dateMessage = 'некорректный формат даты';
+  @Input() timeMessage = 'некорректный формат времени';
   @Input() requiredMessage = 'обязательное поле';
-  @Input() customMessage = '';
+  @Input() customMessage = 'некорректный формат поля';
 
   get message(): string {
     if (this.validate('required')) {
@@ -15,6 +16,9 @@ export class BaseError {
     }
     if (this.validate('invalidDate')) {
       return this.dateMessage;
+    }
+    if (this.validate('timeMessage')) {
+      return this.timeMessage;
     }
     if (this.validate('customMessage')) {
       return this.customMessage;

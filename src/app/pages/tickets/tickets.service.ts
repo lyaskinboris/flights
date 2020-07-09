@@ -1,3 +1,4 @@
+import { Utility } from './../../app.utility';
 import { Injectable } from '@angular/core';
 
 import { Ticket } from './ticket.model';
@@ -36,7 +37,7 @@ export class TicketsService {
         this.addTicket(ticket);
       }
     ));
-
+      console.log('cityNeighbors', this.cityNeighbors);
     this.generateAllPaths();
   }
 
@@ -86,7 +87,7 @@ export class TicketsService {
   private generatePath(
     pathCitiesId: string[],
     toCity: CityData,
-    fromCityTime: moment.Moment
+    fromCityTime: string
   ): void {
 
     if (!toCity) {
@@ -98,7 +99,7 @@ export class TicketsService {
       const setCitiesFromToCity = this.cityNeighbors.get(toCity.address.name);
 
       for (const nextCity of setCitiesFromToCity) {
-        if (nextCity.arrivalCity.time.valueOf() > fromCityTime.valueOf()) {
+        if (Utility.getDateTimeFromString(nextCity.arrivalCity.time).valueOf() > Utility.getDateTimeFromString(fromCityTime).valueOf()) {
           this.generatePath(
             pathCitiesId.concat(nextCity.arrivalCity.id),
             nextCity.arrivalCity,

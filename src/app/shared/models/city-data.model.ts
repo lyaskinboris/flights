@@ -3,6 +3,6 @@ import * as moment from 'moment';
 
 export class CityData {
   public address: Address;
-  public time: moment.Moment;
+  public time: string;
   public id: string;
 }

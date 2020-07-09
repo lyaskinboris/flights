@@ -8,9 +8,9 @@
     <div *ngFor="let ticket of ticketsService.tickets">
       <app-ticket
         [fromCity]="ticket.fromCity.address.name"
-        [fromTime]="getTimeString(ticket.fromCity.time)"
+        [fromTime]="ticket.fromCity.time"
         [toCity]="ticket.arrivalCity.address.name"
-        [arrivalTime]="getTimeString(ticket.arrivalCity.time)"
+        [arrivalTime]="ticket.arrivalCity.time"
       ></app-ticket>
     </div>
   </div>

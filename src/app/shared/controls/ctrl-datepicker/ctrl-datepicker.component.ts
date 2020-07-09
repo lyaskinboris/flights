@@ -25,7 +25,7 @@ export class CtrlDatepickerComponent extends BaseControl implements ControlValue
 
   writeValue(value: string): void {
     if (value !== this.value) {
-      this.value = _moment(value, dateFormat);
+      this.value = Utility.getDateFromString(value);
       if (dateRegex.test(value)) {
         this.date = this.value.format(dateFormat);
       }
@@ -37,14 +37,12 @@ export class CtrlDatepickerComponent extends BaseControl implements ControlValue
   }
 
   dateValueChanged(value: any ): void {
-    console.log('value', this.value);
-    console.log('value', value.value);
     if (value && Utility.isMoment(value.value)) {
       this.value = _moment(value.value, dateFormat);
       this.date = _moment(value.value).format(dateFormat);
     } else {
       if (dateRegex.test(value)) {
-        this.value = _moment(value, dateFormat);
+        this.value = Utility.getDateFromString(value);
       } else {
         if (value && value.length <= 10) {
           this.value = value;
@@ -52,7 +50,7 @@ export class CtrlDatepickerComponent extends BaseControl implements ControlValue
       }
     }
 
-    this.onChange(this.value);
+    this.onChange(this.date);
     this.onTouched();
   }
 }

@@ -1,7 +1,6 @@
 import { TicketsService } from './../../tickets.service';
 import { Component, OnInit, ViewChild, Input, Inject, ElementRef } from '@angular/core';
 import { MapService } from './map.service';
-import { first } from 'rxjs/operators';
 import { Address } from '../../../../shared/models/address.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -25,7 +24,6 @@ export class RouteMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('data', this.data);
     this.route = this.data;
     this.mapService.yMapsLoaded.subscribe((value) => {
       if (value) {

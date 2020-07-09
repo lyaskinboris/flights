@@ -1,11 +1,11 @@
-import { dateTimeFormat } from './shared/constants';
-import * as moment from 'moment';
+import { dateTimeFormat, dateFormat } from './shared/constants';
+import * as _moment from 'moment';
 import { Address } from './shared/models/address.model';
 
 export class Utility {
   static isMoment(value): boolean {
     if (this.hasValue(value)) {
-      return moment.isMoment(value);
+      return _moment.isMoment(value);
     }
     return false;
   }
@@ -54,11 +54,21 @@ export class Utility {
 
   static getDateTimeStringFromMoment(value): string {
     if (this.isMoment(value)) {
-      return moment(value).format(dateTimeFormat);
+      return _moment(value).format(dateTimeFormat);
     }
     if (this.isString(value)) {
       return value;
     }
     return '';
+  }
+
+  static getDateFromString(value: string): _moment.Moment {
+    const date = new Date(value);
+    return _moment(date, dateFormat);
+  }
+
+  static getDateTimeFromString(value: string): _moment.Moment {
+    const date = new Date(value);
+    return _moment.utc(date, dateTimeFormat);
   }
 }
