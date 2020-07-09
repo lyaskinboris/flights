@@ -63,12 +63,11 @@ export class Utility {
   }
 
   static getDateFromString(value: string): _moment.Moment {
-    const date = new Date(value);
-    return _moment(date, dateFormat);
+    return _moment(value, dateFormat);
   }
 
   static getDateTimeFromString(value: string): _moment.Moment {
     const date = new Date(value);
-    return _moment.utc(date, dateTimeFormat);
+    return _moment(date, dateTimeFormat);
   }
 }
