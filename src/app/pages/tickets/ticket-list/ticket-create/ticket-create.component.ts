@@ -1,12 +1,10 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
-import * as moment from 'moment';
 
-import { dateFormat } from './../../../../shared/constants';
 import { Utility } from './../../../../app.utility';
 import { Ticket } from '../../ticket.model';
 import { TicketsService } from '../../tickets.service';
-import { dateTimeFormat } from '../../../../shared/constants';
+import * as _moment from 'moment';
 
 @Component({
   selector: 'app-ticket-create',
@@ -28,7 +26,8 @@ export class TicketCreateComponent implements OnInit {
       ])],
       fromDate: ['', Validators.compose([
         Validators.required,
-        this.getDateValidator()
+        this.getDateValidator(),
+        this.getComprasionDateValidator('arrivalDate', false)
       ])],
       fromTime: ['', Validators.compose([
         Validators.required,
@@ -37,7 +36,8 @@ export class TicketCreateComponent implements OnInit {
       arrivalCity: ['', Validators.required],
       arrivalDate: ['', Validators.compose([
         Validators.required,
-        this.getDateValidator()
+        this.getDateValidator(),
+        this.getComprasionDateValidator('fromDate', true)
       ])],
       arrivalTime: ['', Validators.compose([
         Validators.required,
@@ -47,7 +47,6 @@ export class TicketCreateComponent implements OnInit {
   }
 
   createTicket(): void {
-    console.log(this.ticketsForm);
     if (this.ticketsForm.invalid) {
       Object.keys(this.ticketsForm.controls).forEach(
         (controlName: string) => {
@@ -77,17 +76,39 @@ export class TicketCreateComponent implements OnInit {
     }
   }
 
-  getTime(date: moment.Moment, time: string): moment.Moment {
-    const dateTime = date.format(dateFormat) + ' ' + time;
+  getTime(date: string, time: string): string {
+    return date + ' ' + time;
+  }
 
-    return moment(dateTime, dateTimeFormat);
+  getComprasionDateValidator(dateField: string, moreThan: boolean): ValidatorFn {
+    return (c: AbstractControl): { [key: string]: boolean } | null => {
+      let date1 = null;
+      let date2 = null;
+
+      if (!this.ticketsForm) {
+        return null;
+      }
+
+      if (moreThan) {
+        date1 = Utility.getDateFromString(c.value);
+        date2 = Utility.getDateFromString(this.ticketsForm.get(dateField).value);
+      } else {
+        date1 = Utility.getDateFromString(this.ticketsForm.get(dateField).value);
+        date2 = Utility.getDateFromString(c.value);
+      }
+
+      if (date1 !== null && date2 !== null && date1.valueOf() < date2.valueOf()) {
+        return { customMessage: true };
+      }
+
+      return null;
+    };
   }
 
   getDateValidator(): ValidatorFn {
     const pattern = /^\d{2}.\d{2}.\d{4}$/;
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       if (Utility.isMoment(control.value)) {
-        console.log('зашелел');
         if (control.value.isValid()) {
           return null;
         } else {
@@ -96,7 +117,8 @@ export class TicketCreateComponent implements OnInit {
           };
         }
       } else if (Utility.isString(control.value) && control.value.length === 10) {
-        if (!pattern.test(control.value)) {
+        const date = Utility.getDateFromString(control.value);
+        if (!date.isValid()) {
           return {
             invalidDate: true
           };
@@ -116,7 +138,7 @@ export class TicketCreateComponent implements OnInit {
       if (Utility.isString(control.value) && control.value.length === 5) {
         if (!pattern.test(control.value)) {
           return {
-            customMessage: 'Некорректно указано время'
+            timeMessage: true
           };
         }
         return null;
@@ -126,10 +148,9 @@ export class TicketCreateComponent implements OnInit {
 
   getAddressValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean | string } | null => {
-      console.log('whats', control.value);
       if (!Utility.isAddress(control.value)) {
         return {
-          customMessage: 'Не выбран адрес'
+          customMessage: true
         };
       }
       return null;
