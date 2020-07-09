@@ -52,11 +52,17 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
 
   transform(data: any): string {
     if (data && data.value) {
-      console.log('dada', data.value);
-
       return data.value;
     }
     return '';
+  }
+
+  inputChanged() {
+    if (this.value) {
+      this.value = null;
+      this.onChange(null);
+      this.onTouched();
+    }
   }
 
   private getData(): Observable<any[]> {
