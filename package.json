@@ -27,7 +27,7 @@
     "moment": "^2.26.0",
     "ngx-mask": "^9.1.2",
     "rxjs": "~6.5.5",
-    "sweetalert2": "^9.15.2",
+    "sweetalert2": "^9.15.3",
     "tslib": "^2.0.0",
     "ymaps": "^0.2.1",
     "zone.js": "~0.10.3"

@@ -1,81 +1,77 @@
-<div class="ticket-create">
-  <!-- <div class="form-image">
+<a class="close" mat-button mat-dialog-close></a>
+
+<h2 mat-dialog-title class="title">Создание билета</h2>
+
+<div class="form-container">
+  <div class="form-image">
     <img src="../../../../assets/img/aircraft.svg" alt="" />
-  </div> -->
-  <div>
-    <form [formGroup]="ticketsForm">
-      <span class="title">Авиабилет</span>
-      <div class="form-content">
-        <div class="column">
-          <h4>Откуда</h4>
-          <app-ctrl-autocomplete-address
-            formControlName="fromCity"
-            placeholder="Откуда"
-          >
-            <app-c-errors
-              [control]="ticketsForm.get('fromCity')"
-            ></app-c-errors>
-          </app-ctrl-autocomplete-address>
-
-          <app-ui-datepicker
-            formControlName="fromDate"
-            [placeholder]="'Дата вылета'"
-          >
-            <app-c-errors
-              [control]="ticketsForm.get('fromDate')"
-            ></app-c-errors>
-          </app-ui-datepicker>
-
-          <app-ctrl-input
-            formControlName="fromTime"
-            type="time"
-            placeholder="Время вылета"
-          >
-            <app-c-errors
-              [control]="ticketsForm.get('fromTime')"
-            ></app-c-errors>
-          </app-ctrl-input>
-        </div>
-
-        <div class="column">
-          <h4>Куда</h4>
-
-          <app-ctrl-autocomplete-address
-            formControlName="arrivalCity"
-            placeholder="Куда"
-          >
-            <app-c-errors
-              [control]="ticketsForm.get('arrivalCity')"
-            ></app-c-errors>
-          </app-ctrl-autocomplete-address>
-
-          <app-ui-datepicker
-            formControlName="arrivalDate"
-            placeholder="Дата прилета"
-          >
-            <app-c-errors
-              [control]="ticketsForm.get('arrivalDate')"
-            ></app-c-errors>
-          </app-ui-datepicker>
-
-          <app-ctrl-input
-            formControlName="arrivalTime"
-            type="time"
-            placeholder="Время прилета"
-          >
-            <app-c-errors
-              [control]="ticketsForm.get('arrivalTime')"
-            ></app-c-errors>
-          </app-ctrl-input>
-        </div>
-      </div>
-      <button class="base-btn" (click)="createTicket()">
-        Создать билет
-      </button>
-    </form>
   </div>
+  <div class="form-content">
+    <ul class="tab-links">
+      <li (click)="changeMode('from')" [ngClass]="{ active: mode === 'from' }">
+        Откуда
+      </li>
+      <li
+        (click)="changeMode('arrival')"
+        [ngClass]="{ active: mode === 'arrival' }"
+      >
+        Куда
+      </li>
+    </ul>
+    <div [formGroup]="ticketsForm">
+      <div formGroupName="from" class="tab-content" *ngIf="mode === 'from'">
+        <app-ctrl-autocomplete-address
+          formControlName="city"
+          placeholder="Откуда"
+        >
+          <app-c-errors [control]="ticketsForm.get('from.city')"></app-c-errors>
+        </app-ctrl-autocomplete-address>
 
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-  </mat-dialog-actions>
+        <app-ui-datepicker formControlName="date" [placeholder]="'Дата вылета'">
+          <app-c-errors [control]="ticketsForm.get('from.date')"></app-c-errors>
+        </app-ui-datepicker>
+
+        <app-ctrl-input
+          formControlName="time"
+          type="time"
+          placeholder="Время вылета"
+        >
+          <app-c-errors [control]="ticketsForm.get('from.time')"></app-c-errors>
+        </app-ctrl-input>
+      </div>
+      <div
+        formGroupName="arrival"
+        class="tab-content"
+        *ngIf="mode === 'arrival'"
+      >
+        <app-ctrl-autocomplete-address
+          formControlName="city"
+          placeholder="Куда"
+        >
+          <app-c-errors
+            [control]="ticketsForm.get('arrival.city')"
+          ></app-c-errors>
+        </app-ctrl-autocomplete-address>
+
+        <app-ui-datepicker formControlName="date" placeholder="Дата прилета">
+          <app-c-errors
+            [control]="ticketsForm.get('arrival.date')"
+          ></app-c-errors>
+        </app-ui-datepicker>
+
+        <app-ctrl-input
+          formControlName="time"
+          type="time"
+          placeholder="Время прилета"
+        >
+          <app-c-errors
+            [control]="ticketsForm.get('arrival.time')"
+          ></app-c-errors>
+        </app-ctrl-input>
+      </div>
+    </div>
+    <div class="btn-container">
+      <a class="base-btn" (click)="createTicket()">{{ btnTitle }}</a>
+    </div>
+  </div>
 </div>

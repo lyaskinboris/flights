@@ -1,4 +1,4 @@
-@import '../../theme/variables.scss';
+@import "../../theme/variables.scss";
 
 .container {
   background-color: $background-color;
@@ -10,7 +10,18 @@
     width: 100%;
 
     .main {
-        padding-top: 3rem;
+      padding-top: 3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 948px) {
+  .container {
+    margin: 3rem;
+    padding: 1rem;
+
+    .main {
+      padding-top: 2rem;
     }
   }
 }

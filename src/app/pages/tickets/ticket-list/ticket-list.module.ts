@@ -6,6 +6,8 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/materia
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 
 import { TicketListComponent } from './ticket-list.component';
@@ -37,6 +39,7 @@ const routes: Routes = [
     ControlsModule,
     MatDialogModule,
     HttpClientModule,
+    MatTabsModule,
     RouterModule.forChild(routes)
   ],
   entryComponents: [

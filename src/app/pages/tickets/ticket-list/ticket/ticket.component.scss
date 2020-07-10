@@ -1,5 +1,5 @@
-@import '../../../../theme/mixins.scss';
-@import '../../../../theme/variables.scss';
+@import "../../../../theme/mixins.scss";
+@import "../../../../theme/variables.scss";
 
 .column {
   @include flex(column, flex-start, flex-start);
@@ -19,5 +19,37 @@
     font-size: 1.5rem;
     padding-right: 40px;
     width: 20rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Media Query */
+@media screen and (max-width: 948px) {
+  .row {
+    flex-direction: column;
+  }
+  .column {
+    flex-direction: row;
+    padding: 9px 9px;
+    background-color: #1e3c53;
+    border-bottom: 1px solid;
+    margin-right: 0;
+
+    .label {
+      width: 100px;
+    }
+    .content {
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .column {
+    .content {
+      width: 13rem;
+    }
   }
 }

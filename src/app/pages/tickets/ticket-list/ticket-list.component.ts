@@ -18,7 +18,8 @@ export class TicketListComponent implements OnInit {
 
   addTicket(): void {
     const dialogRef = this.dialog.open(TicketCreateComponent, {
-      closeOnNavigation: true
+      closeOnNavigation: true,
+      panelClass: 'my-dialog',
     });
 
     dialogRef.afterClosed().subscribe(result => {

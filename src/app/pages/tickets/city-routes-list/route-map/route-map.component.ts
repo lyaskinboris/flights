@@ -2,7 +2,7 @@ import { TicketsService } from './../../tickets.service';
 import { Component, OnInit, ViewChild, Input, Inject, ElementRef } from '@angular/core';
 import { MapService } from './map.service';
 import { Address } from '../../../../shared/models/address.model';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-route-map',
@@ -19,6 +19,7 @@ export class RouteMapComponent implements OnInit {
   constructor(
     private readonly mapService: MapService,
     private readonly ticketsService: TicketsService,
+    private readonly dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: string[]
   ) {
   }
@@ -31,6 +32,9 @@ export class RouteMapComponent implements OnInit {
           center: [55.76, 37.64],
           zoom: 3,
           controls: ['geolocationControl', 'zoomControl', 'fullscreenControl']
+        });
+        this.map.container.events.add('fullscreenenter', () => {
+          this.dialog.closeAll();
         });
         this.loadPlacemark();
       }

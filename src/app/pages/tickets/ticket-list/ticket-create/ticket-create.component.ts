@@ -1,78 +1,102 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 import { Utility } from './../../../../app.utility';
 import { Ticket } from '../../ticket.model';
 import { TicketsService } from '../../tickets.service';
 import * as _moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+
+enum formMode {
+  'from' = 'from',
+  'arrival' = 'arrival'
+}
 
 @Component({
   selector: 'app-ticket-create',
   templateUrl: './ticket-create.component.html',
   styleUrls: ['./ticket-create.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
 })
 export class TicketCreateComponent implements OnInit {
   ticketsForm: FormGroup;
+  mode: formMode;
 
-  constructor(private fb: FormBuilder, private ticketsService: TicketsService) {
+  get btnTitle(): string {
+    switch (this.mode) {
+      case formMode.from:
+        return 'Продолжить оформление';
+      case formMode.arrival:
+        return 'Создать билет';
+      default:
+        break;
+    }
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private ticketsService: TicketsService,
+    private readonly dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.ticketsForm = this.fb.group({
-      fromCity: ['', Validators.compose([
-        Validators.required,
-        this.getAddressValidator()
-      ])],
-      fromDate: ['', Validators.compose([
-        Validators.required,
-        this.getDateValidator(),
-        this.getComprasionDateValidator('arrivalDate', false)
-      ])],
-      fromTime: ['', Validators.compose([
-        Validators.required,
-        this.getTimeValidator()
-      ])],
-      arrivalCity: ['', Validators.required],
-      arrivalDate: ['', Validators.compose([
-        Validators.required,
-        this.getDateValidator(),
-        this.getComprasionDateValidator('fromDate', true)
-      ])],
-      arrivalTime: ['', Validators.compose([
-        Validators.required,
-        this.getTimeValidator()
-      ])],
+      from: this.fb.group({
+        city: ['', Validators.compose([
+          Validators.required,
+          this.getAddressValidator()
+        ])],
+        date: ['', Validators.compose([
+          Validators.required,
+          this.getDateValidator(),
+          this.getComprasionDateValidator('arrival', false)
+        ])],
+        time: ['', Validators.compose([
+          Validators.required,
+          this.getTimeValidator()
+        ])],
+      }),
+      arrival: this.fb.group({
+        city: ['', Validators.required],
+        date: ['', Validators.compose([
+          Validators.required,
+          this.getDateValidator(),
+          this.getComprasionDateValidator('from', true)
+        ])],
+        time: ['', Validators.compose([
+          Validators.required,
+          this.getTimeValidator()
+        ])],
+      })
     });
+
+    this.mode = formMode.from;
   }
 
   createTicket(): void {
-    if (this.ticketsForm.invalid) {
-      Object.keys(this.ticketsForm.controls).forEach(
-        (controlName: string) => {
-          this.ticketsForm.get(controlName).markAsDirty();
-          this.ticketsForm.get(controlName).markAsTouched();
+    console.log('click', this.ticketsForm);
+    switch (this.mode) {
+      case formMode.from:
+        if (this.ticketsForm.get('from').valid) {
+          this.mode = formMode.arrival;
+        } else {
+          this.markTouchedAndDirty('from');
         }
-      );
-    } else {
-      const ticket: Ticket = {
-        fromCity: {
-          address: {
-            ...this.ticketsForm.get('fromCity').value
-          },
-          time: this.getTime(this.ticketsForm.get('fromDate').value, this.ticketsForm.get('fromTime').value),
-          id: Math.random().toString(16).slice(2)
-        },
-        arrivalCity: {
-          address: {
-            ...this.ticketsForm.get('arrivalCity').value
-          },
-          time: this.getTime(this.ticketsForm.get('arrivalDate').value, this.ticketsForm.get('arrivalTime').value),
-          id: Math.random().toString(16).slice(2)
+        break;
+      case formMode.arrival:
+        if (this.ticketsForm.get('arrival').valid) {
+          console.log(this.ticketsForm.invalid);
+          if (this.ticketsForm.invalid) {
+            Swal.fire('Форма не заполнена', 'Заполните полностью раздел откуда!', 'error')
+          }
+          this.addNewTicket();
+        } else {
+          this.markTouchedAndDirty('arrival');
         }
-      };
-
-      this.ticketsService.addTicket(ticket, true);
+        break;
+      default:
+        break;
     }
   }
 
@@ -80,7 +104,7 @@ export class TicketCreateComponent implements OnInit {
     return date + ' ' + time;
   }
 
-  getComprasionDateValidator(dateField: string, moreThan: boolean): ValidatorFn {
+  getComprasionDateValidator(fieldGroup: string, moreThan: boolean): ValidatorFn {
     return (c: AbstractControl): { [key: string]: boolean } | null => {
       let date1 = null;
       let date2 = null;
@@ -91,9 +115,9 @@ export class TicketCreateComponent implements OnInit {
 
       if (moreThan) {
         date1 = Utility.getDateFromString(c.value);
-        date2 = Utility.getDateFromString(this.ticketsForm.get(dateField).value);
+        date2 = Utility.getDateFromString(this.ticketsForm.get(fieldGroup).get('date').value);
       } else {
-        date1 = Utility.getDateFromString(this.ticketsForm.get(dateField).value);
+        date1 = Utility.getDateFromString(this.ticketsForm.get(fieldGroup).get('date').value);
         date2 = Utility.getDateFromString(c.value);
       }
 
@@ -155,6 +179,50 @@ export class TicketCreateComponent implements OnInit {
       }
       return null;
     };
+  }
+
+  changeMode(mode: string): void {
+    switch (mode) {
+      case formMode.from:
+        this.mode = formMode.from;
+        break;
+      case formMode.arrival:
+        this.mode = formMode.arrival;
+        break;
+      default:
+        break;
+    }
+  }
+
+  private markTouchedAndDirty(groupName: string) {
+    const form: FormGroup = this.ticketsForm.controls[groupName] as FormGroup;
+    for (const controlName in form.controls) {
+      if (controlName) {
+        form.controls[controlName].markAsDirty();
+        form.controls[controlName].markAsTouched();
+      }
+    }
+  }
+
+  private addNewTicket(): void {
+    const ticket: Ticket = {
+      fromCity: {
+        address: {
+          ...this.ticketsForm.get('from.city').value
+        },
+        time: this.getTime(this.ticketsForm.get('from.date').value, this.ticketsForm.get('from.time').value),
+        id: Math.random().toString(16).slice(2)
+      },
+      arrivalCity: {
+        address: {
+          ...this.ticketsForm.get('arrival.city').value
+        },
+        time: this.getTime(this.ticketsForm.get('arrival.date').value, this.ticketsForm.get('arrival.time').value),
+        id: Math.random().toString(16).slice(2)
+      }
+    };
+
+    this.ticketsService.addTicket(ticket, true);
   }
 }
 

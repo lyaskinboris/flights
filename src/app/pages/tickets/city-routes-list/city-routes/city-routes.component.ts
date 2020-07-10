@@ -24,6 +24,7 @@ export class CityRoutesComponent {
       closeOnNavigation: true,
       data: this.ticketRoute,
       width: '100%',
+      panelClass: 'my-dialog',
     });
 
     dialogRef.afterClosed().subscribe(result => {
