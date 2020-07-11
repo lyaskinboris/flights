@@ -73,7 +73,6 @@ export class TicketCreateComponent implements OnInit {
   }
 
   createTicket(): void {
-    console.log('click', this.ticketsForm);
     switch (this.mode) {
       case formMode.from:
         if (this.ticketsForm.get('from').valid) {
@@ -84,7 +83,6 @@ export class TicketCreateComponent implements OnInit {
         break;
       case formMode.arrival:
         if (this.ticketsForm.get('arrival').valid) {
-          console.log(this.ticketsForm.invalid);
           if (this.ticketsForm.invalid) {
             Swal.fire('Форма не заполнена', 'Заполните полностью раздел откуда!', 'error')
           }

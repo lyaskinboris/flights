@@ -28,7 +28,6 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
   myControl = new FormControl();
 
   value: any;
-  isLoadin2g: boolean;
 
   constructor(private readonly restService: RESTService) {
     super();
@@ -36,6 +35,13 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
 
   ngOnInit(): void {
     this.filteredOptions$ = this.getData();
+  }
+
+  writeValue(value: any): any {
+    if (value instanceof Address && this.value !== value) {
+      this.value = value.name;
+      this.myControl.setValue(this.value);
+    }
   }
 
   changeDropdown(value: MatAutocompleteSelectedEvent): void {
@@ -46,7 +52,7 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
       longitude: value.option.value.data.geo_lon,
       latitude: value.option.value.data.geo_lat
     });
-    console.log(address);
+
     this.onChange(address);
     this.onTouched();
   }
@@ -54,6 +60,9 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
   transform(data: any): string {
     if (data && data.value) {
       return data.value;
+    }
+    if (data) {
+      return data;
     }
     return '';
   }

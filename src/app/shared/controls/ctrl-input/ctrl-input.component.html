@@ -5,6 +5,7 @@
     [type]="type"
     [placeholder]="placeholder"
     [readonly]="readonly"
+    [(ngModel)]='value'
     (change)="changeValue($event.target.value)"
     (focus)="onFocus()"
     (blur)="onBlur()"
