@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import * as _moment from 'moment';
 
@@ -36,6 +37,7 @@ export class TicketCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private ticketsService: TicketsService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -85,8 +87,13 @@ export class TicketCreateComponent implements OnInit {
         if (this.ticketsForm.get('arrival').valid) {
           if (this.ticketsForm.invalid) {
             Swal.fire('Форма не заполнена', 'Заполните полностью раздел откуда!', 'error')
+              .then(() => this.mode = formMode.from);
+          } else {
+            this.addNewTicket();
+            this.ticketsForm.reset();
+            this.dialog.closeAll();
+            Swal.fire('Билет успешно создан', '', 'success');
           }
-          this.addNewTicket();
         } else {
           this.markTouchedAndDirty('arrival');
         }
@@ -190,7 +197,7 @@ export class TicketCreateComponent implements OnInit {
     };
   }
 
-  private markTouchedAndDirty(groupName: string) {
+  private markTouchedAndDirty(groupName: string): void {
     const form: FormGroup = this.ticketsForm.controls[groupName] as FormGroup;
     for (const controlName in form.controls) {
       if (controlName) {

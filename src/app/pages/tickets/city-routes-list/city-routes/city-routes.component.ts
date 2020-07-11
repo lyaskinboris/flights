@@ -13,7 +13,7 @@ export class CityRoutesComponent {
   @Input() ticketRoute: string[] = [];
   open: boolean;
 
-  constructor(public ticketsService: TicketsService, public dialog: MatDialog) {
+  constructor(public ticketsService: TicketsService, private dialog: MatDialog) {
 
   }
 
