@@ -1,5 +1,9 @@
 <ul class="tab-links">
-  <li routerLink="/ticket-list" routerLinkActive="active">
+  <li
+    routerLink=""
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
     <a>Список билетов</a>
   </li>
   <li routerLink="/city-routes-list" routerLinkActive="active">

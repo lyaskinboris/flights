@@ -7,9 +7,8 @@ const appRoutes: Routes = [
     path: '',
     component: TicketsComponent,
     children: [
-      { path: '', redirectTo: 'ticket-list', pathMatch: 'full' },
       {
-        path: 'ticket-list',
+        path: '',
         loadChildren: () => import('./pages/tickets/ticket-list/ticket-list.module').then(x => x.TicketListModule)
       },
       {
