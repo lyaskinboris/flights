@@ -12,7 +12,8 @@ import { Address } from '../../../../shared/models/address.model';
   providers: [MapService]
 })
 export class RouteMapComponent implements OnInit {
-  route: string[] = [];
+  routesForMark: string[] = [];
+  loading: boolean;
 
   @ViewChild('yamaps', { static: true }) yandexMap: ElementRef;
   map;
@@ -26,10 +27,13 @@ export class RouteMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route = this.data;
+    this.routesForMark = this.data;
+    this.loading = true;
 
     this.mapService.yMapsLoaded.subscribe((value) => {
       if (value) {
+        this.loading = false;
+
         this.map = new this.mapService.map.Map(this.yandexMap.nativeElement, {
           center: [55.76, 37.64],
           zoom: 3,
@@ -47,7 +51,7 @@ export class RouteMapComponent implements OnInit {
     const location: number[][] = [];
     const placemark: {}[] = [];
 
-    this.route.forEach((cityId: string) => {
+    this.routesForMark.forEach((cityId: string) => {
       const cityAddress: Address = this.ticketsService.mapOfCities.get(cityId).cityData.address;
       const currentLocation = [cityAddress.latitude, cityAddress.longitude];
 

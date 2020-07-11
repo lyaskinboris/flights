@@ -1,4 +1,7 @@
 <a class="close" mat-button mat-dialog-close></a>
 <h2 mat-dialog-title class="title">Маршрут на карте</h2>
 
-<div class="yamaps" #yamaps></div>
+
+<div class="yamaps" #yamaps>
+  <app-ui-loader *ngIf='loading'></app-ui-loader>
+</div>
