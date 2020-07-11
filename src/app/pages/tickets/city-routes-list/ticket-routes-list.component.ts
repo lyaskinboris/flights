@@ -1,12 +1,11 @@
 import { TicketsService } from './../tickets.service';
-import { Component, ViewEncapsulation, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-ticket-routes-list',
   templateUrl: './ticket-routes-list.component.html',
   styleUrls: ['./ticket-routes-list.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  // encapsulation: ViewEncapsulation.None,
 })
 export class TicketRoutesListComponent implements OnInit {
 

@@ -2,7 +2,7 @@
 @import "../../../../theme/variables.scss";
 
 .routes-wrapper {
-  background: #1e3c53;
+  background: $primary;
   padding: 3rem;
 
   .route-item-container {
@@ -64,7 +64,7 @@
 
   .base-btn {
     @include base-button();
-    background-color: #f57c00;
+    background-color: $button;
     color: white;
     margin-top: 5rem;
     min-width: 220px;

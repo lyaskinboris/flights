@@ -1,6 +1,7 @@
-import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
+import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { TicketsService } from '../tickets.service';
 
 

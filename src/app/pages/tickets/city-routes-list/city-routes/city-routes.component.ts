@@ -1,7 +1,8 @@
-import { RouteMapComponent } from '../route-map/route-map.component';
-import { TicketsService } from '../../tickets.service';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
+import { RouteMapComponent } from '../route-map/route-map.component';
+import { TicketsService } from '../../tickets.service';
 
 @Component({
   selector: 'app-city-routes',

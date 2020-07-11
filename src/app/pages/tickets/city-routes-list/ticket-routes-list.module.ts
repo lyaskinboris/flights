@@ -1,14 +1,14 @@
-import { UIKitModule } from './../../../ui-kit/ui-kit.module';
-import { TicketRoutesListComponent } from './ticket-routes-list.component';
-import { RouteMapComponent } from './route-map/route-map.component';
-import { ControlsModule } from './../../../shared/controls/controls.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
-
 import { Routes, RouterModule } from '@angular/router';
+
+import { UIKitModule } from './../../../ui-kit/ui-kit.module';
+import { TicketRoutesListComponent } from './ticket-routes-list.component';
+import { RouteMapComponent } from './route-map/route-map.component';
+import { ControlsModule } from './../../../shared/controls/controls.module';
 import { CityRoutesComponent } from './city-routes/city-routes.component';
 
 const routes: Routes = [

@@ -1,12 +1,11 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import * as _moment from 'moment';
 
 import { Utility } from './../../../../app.utility';
 import { Ticket } from '../../ticket.model';
 import { TicketsService } from '../../tickets.service';
-import * as _moment from 'moment';
-import { MatDialog } from '@angular/material/dialog';
 
 enum formMode {
   'from' = 'from',
@@ -37,8 +36,7 @@ export class TicketCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private ticketsService: TicketsService,
-    private readonly dialog: MatDialog) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.ticketsForm = this.fb.group({
@@ -102,6 +100,19 @@ export class TicketCreateComponent implements OnInit {
 
   getTime(date: string, time: string): string {
     return date + ' ' + time;
+  }
+
+  changeMode(mode: string): void {
+    switch (mode) {
+      case formMode.from:
+        this.mode = formMode.from;
+        break;
+      case formMode.arrival:
+        this.mode = formMode.arrival;
+        break;
+      default:
+        break;
+    }
   }
 
   getComprasionDateValidator(fieldGroup: string, moreThan: boolean): ValidatorFn {
@@ -179,19 +190,6 @@ export class TicketCreateComponent implements OnInit {
       }
       return null;
     };
-  }
-
-  changeMode(mode: string): void {
-    switch (mode) {
-      case formMode.from:
-        this.mode = formMode.from;
-        break;
-      case formMode.arrival:
-        this.mode = formMode.arrival;
-        break;
-      default:
-        break;
-    }
   }
 
   private markTouchedAndDirty(groupName: string) {

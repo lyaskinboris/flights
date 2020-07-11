@@ -1,0 +1,6 @@
+@import "../../../theme/mixins.scss";
+@import "../../../theme/variables.scss";
+
+.tab-links {
+  @include ui-tabs();
+}

@@ -7,12 +7,18 @@
 
 @mixin base-button {
   color: white;
-  background-color: #1e3c53;
+  background-color: $primary;
   border-radius: 0.5rem;
-  min-width: 320px;
+  text-align: center;
+  // min-width: 320px;
+  width: 320px;
   padding: 1.5rem;
   border: none;
   cursor: pointer;
+
+  @media screen and (max-width: 948px) {
+    width: 100%;
+  }
 }
 
 @mixin ui-tabs {

@@ -1,4 +1,3 @@
-// import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';

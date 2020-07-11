@@ -1,8 +1,9 @@
+import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+
 import { TicketsService } from './../../tickets.service';
-import { Component, OnInit, ViewChild, Input, Inject, ElementRef } from '@angular/core';
 import { MapService } from './map.service';
 import { Address } from '../../../../shared/models/address.model';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-route-map',
@@ -26,6 +27,7 @@ export class RouteMapComponent implements OnInit {
 
   ngOnInit(): void {
     this.route = this.data;
+
     this.mapService.yMapsLoaded.subscribe((value) => {
       if (value) {
         this.map = new this.mapService.map.Map(this.yandexMap.nativeElement, {
@@ -44,6 +46,7 @@ export class RouteMapComponent implements OnInit {
   private loadPlacemark(): void {
     const location: number[][] = [];
     const placemark: {}[] = [];
+
     this.route.forEach((cityId: string) => {
       const cityAddress: Address = this.ticketsService.mapOfCities.get(cityId).address;
       const currentLocation = [cityAddress.latitude, cityAddress.longitude];

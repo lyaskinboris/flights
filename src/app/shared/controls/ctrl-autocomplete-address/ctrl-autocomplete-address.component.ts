@@ -1,11 +1,12 @@
-import { Ticket } from './../../../pages/tickets/ticket.model';
-import { RESTService } from './../../../providers/rest.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { Component, Input, forwardRef, OnInit, ViewEncapsulation } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { startWith, debounceTime, switchMap, map, filter } from 'rxjs/operators';
-import { Address } from '../../models/address.model';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { startWith, debounceTime, switchMap, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+
+import { Ticket } from './../../../pages/tickets/ticket.model';
+import { RESTService } from './../../../providers/rest.service';
+import { Address } from '../../models/address.model';
 import { BaseControl } from '../base.control';
 
 @Component({
@@ -57,7 +58,7 @@ export class CtrlAutocompleteAddressComponent extends BaseControl implements Con
     return '';
   }
 
-  inputChanged() {
+  inputChanged(): void {
     if (this.value) {
       this.value = null;
       this.onChange(null);

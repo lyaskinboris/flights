@@ -22,11 +22,12 @@
   }
 
   .btn-container {
-    text-align: right;
+    @include flex(row, flex-end, flex-start);
 
     .base-btn {
       @include base-button();
       width: 320px;
+      display: block;
     }
   }
 

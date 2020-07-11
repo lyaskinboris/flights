@@ -1,5 +1,6 @@
-import { dateTimeFormat, dateFormat } from './shared/constants';
 import * as _moment from 'moment';
+
+import { dateTimeFormat, dateFormat } from './shared/constants';
 import { Address } from './shared/models/address.model';
 
 export class Utility {

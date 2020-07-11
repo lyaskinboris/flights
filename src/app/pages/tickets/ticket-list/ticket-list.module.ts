@@ -1,4 +1,3 @@
-import { ControlsModule } from './../../../shared/controls/controls.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,16 +6,14 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/mat
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import { Routes, RouterModule } from '@angular/router';
 
 
 import { TicketListComponent } from './ticket-list.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketCreateComponent } from './ticket-create/ticket-create.component';
 import { CErrorsComponent } from '../../../shared/component/c-errors/c-errors.component';
-// import { RESTService } from '../../../providers/rest.service';
-import { Routes, RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+import { ControlsModule } from './../../../shared/controls/controls.module';
 
 const routes: Routes = [
   {
@@ -46,7 +43,6 @@ const routes: Routes = [
     TicketCreateComponent,
   ],
   providers: [
-    // RESTService,
     {
       provide: MAT_DATE_FORMATS, useValue: {
         parse: {

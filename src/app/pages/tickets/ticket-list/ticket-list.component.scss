@@ -1,4 +1,5 @@
 @import '../../../theme/mixins.scss';
+@import '../../../theme/variables.scss';
 
 .ticket-list-wrapper {
   @include flex(column, center, center);
@@ -13,7 +14,7 @@
 
   .base-btn {
     @include base-button();
-    background-color: #f57c00;
+    background-color: $button;
     min-width: 220px;
   }
 }
