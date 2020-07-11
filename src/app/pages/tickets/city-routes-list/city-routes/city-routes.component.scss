@@ -56,6 +56,7 @@
       margin-top: 2rem;
     }
     .time {
+      @include flex(row, center, flex-start);
       margin-top: 1.6rem;
       font-size: 1.4rem;
       color: #a0b0b9;

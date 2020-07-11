@@ -48,7 +48,7 @@ export class RouteMapComponent implements OnInit {
     const placemark: {}[] = [];
 
     this.route.forEach((cityId: string) => {
-      const cityAddress: Address = this.ticketsService.mapOfCities.get(cityId).address;
+      const cityAddress: Address = this.ticketsService.mapOfCities.get(cityId).cityData.address;
       const currentLocation = [cityAddress.latitude, cityAddress.longitude];
 
       location.push(currentLocation);

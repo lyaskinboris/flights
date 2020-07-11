@@ -4,12 +4,18 @@ import { Ticket } from './ticket.model';
 import { CityData } from '../../shared/models/city-data.model';
 import { Utility } from './../../app.utility';
 
+interface TicketCity {
+  cityData: CityData;
+  fromTime: string;
+  arrivalTime: string;
+}
+
 @Injectable()
 export class TicketsService {
 
   private cityNeighbors: Map<string, Ticket[]> = new Map();
   // tslint:disable-next-line: variable-name
-  private _mapOfCities: Map<string, CityData> = new Map();
+  private _mapOfCities: Map<string, TicketCity> = new Map();
   // tslint:disable-next-line: variable-name
   private _cityRoutes: string[][] = [];
   // tslint:disable-next-line: variable-name
@@ -23,7 +29,7 @@ export class TicketsService {
     return this._cityRoutes;
   }
 
-  get mapOfCities(): Map<string, CityData> {
+  get mapOfCities(): Map<string, TicketCity> {
     return this._mapOfCities;
   }
 
@@ -78,7 +84,8 @@ export class TicketsService {
       this.generatePath(
         [value[0].fromCity.id],
         toCity,
-        toCity.time
+        toCity.time,
+        toCity.id
       );
     });
 
@@ -88,7 +95,8 @@ export class TicketsService {
   private generatePath(
     pathCitiesId: string[],
     toCity: CityData,
-    fromCityTime: string
+    fromCityTime: string,
+    fromCityId: string
   ): void {
 
     if (!toCity) {
@@ -100,10 +108,17 @@ export class TicketsService {
       const setCitiesFromToCity = this.cityNeighbors.get(toCity.address.name);
       for (const nextCity of setCitiesFromToCity) {
         if (Utility.getDateTimeFromString(nextCity.arrivalCity.time).valueOf() > Utility.getDateTimeFromString(fromCityTime).valueOf()) {
+          if (!this._mapOfCities.get(fromCityId).fromTime) {
+            this._mapOfCities.get(fromCityId).fromTime = nextCity.fromCity.time;
+          }
+          if (!this._mapOfCities.get(fromCityId).arrivalTime) {
+            this._mapOfCities.get(fromCityId).arrivalTime = nextCity.arrivalCity.time;
+          }
           this.generatePath(
             pathCitiesId.concat(nextCity.arrivalCity.id),
             nextCity.arrivalCity,
-            nextCity.arrivalCity.time
+            nextCity.arrivalCity.time,
+            nextCity.arrivalCity.id
           );
         } else {
           this._cityRoutes.push(pathCitiesId);
@@ -115,7 +130,22 @@ export class TicketsService {
   }
 
   private setCities(ticket: Ticket): void {
-    this._mapOfCities.set(ticket.fromCity.id, ticket.fromCity);
-    this._mapOfCities.set(ticket.arrivalCity.id, ticket.arrivalCity);
+    this._mapOfCities.set(
+      ticket.fromCity.id,
+      {
+        cityData: ticket.fromCity,
+        fromTime: null,
+        arrivalTime: null
+      }
+    );
+
+    this._mapOfCities.set(
+      ticket.arrivalCity.id,
+      {
+        cityData: ticket.arrivalCity,
+        fromTime: null,
+        arrivalTime: null
+      }
+    );
   }
 }

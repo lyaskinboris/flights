@@ -1,19 +1,24 @@
 <div class="routes-wrapper">
   <div class="route-item-container">
-    <div class="route-item" *ngFor="let ticket of ticketRoute; let index = index">
+    <div
+      class="route-item"
+      *ngFor="let ticket of ticketRoute; let index = index; let last = last"
+    >
       <div class="route-img">
         <div class="cicle">
-          {{index + 1}}
+          {{ index + 1 }}
         </div>
         <div class="line"></div>
       </div>
       <div class="route-content">
         <div class="header">
-          {{ getCityFromTicket(ticket) }}
+          {{ getCityName(ticket) }}
         </div>
-        <div class="time">
+        <div class="time" *ngIf='!last'>
           Время вылета: <br />
-          {{ getTimeFromTicket(ticket) }}
+          {{ getTimeFrom(ticket) }} <br />
+          Время прилёта: <br />
+          {{ getTimeArrival(ticket) }} <br />
         </div>
       </div>
     </div>

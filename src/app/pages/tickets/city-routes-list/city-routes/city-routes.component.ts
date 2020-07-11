@@ -35,11 +35,15 @@ export class CityRoutesComponent {
     this.open = true;
   }
 
-  getCityFromTicket(ticketRoute: string): string {
-    return this.ticketsService.mapOfCities.get(ticketRoute).address.name;
+  getCityName(ticketRoute: string): string {
+    return this.ticketsService.mapOfCities.get(ticketRoute).cityData.address.name;
   }
 
-  getTimeFromTicket(ticketRoute: string): string {
-    return this.ticketsService.mapOfCities.get(ticketRoute).time;
+  getTimeFrom(ticketRoute: string): string {
+    return this.ticketsService.mapOfCities.get(ticketRoute).fromTime;
+  }
+
+  getTimeArrival(ticketRoute: string): string {
+    return this.ticketsService.mapOfCities.get(ticketRoute).arrivalTime;
   }
 }
