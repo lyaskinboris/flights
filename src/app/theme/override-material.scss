@@ -27,6 +27,10 @@
   .mat-form-field-infix {
     width: 100%;
   }
+
+  &.mat-focused .mat-form-field-label {
+    color: $primary;
+  }
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {

@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./ui-loader.component.scss']
 })
 export class UILoaderComponent {
-  @Input() message = 'Загрузка';
+  @Input() message = 'Загрузка...';
 
 }
