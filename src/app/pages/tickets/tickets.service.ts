@@ -1,8 +1,8 @@
-import { Utility } from './../../app.utility';
 import { Injectable } from '@angular/core';
 
 import { Ticket } from './ticket.model';
 import { CityData } from '../../shared/models/city-data.model';
+import { Utility } from './../../app.utility';
 
 @Injectable()
 export class TicketsService {
@@ -37,7 +37,6 @@ export class TicketsService {
         this.addTicket(ticket);
       }
     ));
-      console.log('cityNeighbors', this.cityNeighbors);
     this.generateAllPaths();
   }
 
@@ -82,6 +81,8 @@ export class TicketsService {
         toCity.time
       );
     });
+
+    this._cityRoutes = this._cityRoutes.sort((a, b) => b.length - a.length);
   }
 
   private generatePath(
@@ -97,7 +98,6 @@ export class TicketsService {
 
     if (this.cityNeighbors.has(toCity.address.name)) {
       const setCitiesFromToCity = this.cityNeighbors.get(toCity.address.name);
-
       for (const nextCity of setCitiesFromToCity) {
         if (Utility.getDateTimeFromString(nextCity.arrivalCity.time).valueOf() > Utility.getDateTimeFromString(fromCityTime).valueOf()) {
           this.generatePath(
@@ -105,6 +105,8 @@ export class TicketsService {
             nextCity.arrivalCity,
             nextCity.arrivalCity.time
           );
+        } else {
+          this._cityRoutes.push(pathCitiesId);
         }
       }
     } else {

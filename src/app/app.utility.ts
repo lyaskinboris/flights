@@ -68,7 +68,6 @@ export class Utility {
   }
 
   static getDateTimeFromString(value: string): _moment.Moment {
-    const date = new Date(value);
-    return _moment(date, dateTimeFormat);
+    return _moment(value, dateTimeFormat);
   }
 }
