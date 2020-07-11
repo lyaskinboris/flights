@@ -28,7 +28,10 @@
         </app-ctrl-autocomplete-address>
 
         <app-ui-datepicker formControlName="date" [placeholder]="'Дата вылета'">
-          <app-c-errors [control]="ticketsForm.get('from.date')"></app-c-errors>
+          <app-c-errors
+            [control]="ticketsForm.get('from.date')"
+            [customMessage]="'должно быть меньше прилета'"
+          ></app-c-errors>
         </app-ui-datepicker>
 
         <app-ctrl-input
@@ -36,7 +39,9 @@
           type="time"
           placeholder="Время вылета"
         >
-          <app-c-errors [control]="ticketsForm.get('from.time')"></app-c-errors>
+          <app-c-errors 
+            [control]="ticketsForm.get('from.time')">
+          </app-c-errors>
         </app-ctrl-input>
       </div>
       <div
@@ -56,6 +61,7 @@
         <app-ui-datepicker formControlName="date" placeholder="Дата прилета">
           <app-c-errors
             [control]="ticketsForm.get('arrival.date')"
+            [customMessage]="'должно быть больше вылета'"
           ></app-c-errors>
         </app-ui-datepicker>
 
