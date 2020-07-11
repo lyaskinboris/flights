@@ -15,7 +15,7 @@ const appRoutes: Routes = [
         path: 'city-routes-list',
         loadChildren: () => import('./pages/tickets/city-routes-list/ticket-routes-list.module').then(x => x.TicketRoutesListModule)
       },
-      { path: '**', redirectTo: 'ticket-list' },
+      { path: '**', redirectTo: '' },
     ]
   }
 ];
