@@ -15,9 +15,9 @@
   }
 }
 
-@media screen and (max-width: 948px) {
+@media screen and ($mobile-screen) {
   .container {
-    margin: 3rem;
+    margin: 1.3rem;
     padding: 1rem;
 
     .main {

@@ -16,7 +16,7 @@
   border: none;
   cursor: pointer;
 
-  @media screen and (max-width: 948px) {
+  @media screen and ($mobile-screen) {
     width: 100%;
   }
 }
@@ -30,6 +30,7 @@
 
   li {
     flex: 1 1 50%;
+    align-self: center;
 
     font-size: 1.5rem;
     padding: 2rem;
@@ -39,8 +40,6 @@
 
     border: 1px solid white;
     border-radius: 30rem;
-
-    transition: $background-color 0.3s;
 
     &.active,
     &:hover {

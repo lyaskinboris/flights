@@ -52,7 +52,7 @@
   }
 }
 
-@media screen and (max-width: 948px) {
+@media screen and ($mobile-screen) {
   .form-image {
     display: none;
   }

@@ -26,7 +26,7 @@
 }
 
 /* Media Query */
-@media screen and (max-width: 948px) {
+@media screen and ($mobile-screen) {
   .row {
     flex-direction: column;
   }
@@ -49,7 +49,7 @@
 @media screen and (max-width: 500px) {
   .column {
     .content {
-      width: 13rem;
+      width: 15rem;
     }
   }
 }

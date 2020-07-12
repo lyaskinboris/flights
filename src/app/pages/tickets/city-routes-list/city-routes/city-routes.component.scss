@@ -73,7 +73,7 @@
 }
 
 /* Media Query */
-@media screen and (max-width: 948px) {
+@media screen and ($mobile-screen) {
   .routes-wrapper {
     display: flex;
     flex-direction: column;
